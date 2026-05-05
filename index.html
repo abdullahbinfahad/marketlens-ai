@@ -319,6 +319,42 @@
             text-shadow: 0 0 12px rgba(255,200,0,0.7);
         }
 
+        /* New floating button styles */
+        .floating-demo-btn {
+            position: fixed;
+            bottom: 85px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245,166,35,0.4);
+            border-radius: 30px;
+            padding: 0.6rem 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(245,166,35,0.2);
+        }
+        .floating-demo-btn:hover {
+            background: rgba(245,166,35,0.15);
+            border-color: var(--gold);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(245,166,35,0.5);
+            transform: translateY(-2px);
+        }
+        .floating-demo-btn .arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .floating-demo-btn:hover .arrow {
+            transform: translateX(4px);
+        }
+
         footer {
             text-align: center;
             padding: 1.2rem 0 4rem;
@@ -334,10 +370,21 @@
             .uni-logo { width: 55px; }
             .team-grid { grid-template-columns: 1fr 1fr; }
             .member-card { height: 180px; }
+            .floating-demo-btn {
+                bottom: 80px;
+                left: 15px;
+                padding: 0.5rem 1.2rem;
+                font-size: 0.8rem;
+            }
         }
         @media (max-width: 480px) {
             .team-grid { grid-template-columns: 1fr; }
             .member-card { height: 180px; }
+            .floating-demo-btn {
+                bottom: 75px;
+                left: 10px;
+                padding: 0.5rem 1rem;
+            }
         }
     </style>
 </head>
@@ -476,6 +523,12 @@ More than just a regular analytics tool, it acts as a dedicated <em>strategic co
             </div>
         </section>
     </div>
+
+    <!-- Floating button linking to the live demo -->
+    <a href="https://marketlens-ai.streamlit.app/" target="_blank" class="floating-demo-btn">
+        <span>🚀 Try Live Demo</span>
+        <span class="arrow">→</span>
+    </a>
 
     <div class="countdown-bar">
         <span class="label">🚀 Finals Countdown</span>
