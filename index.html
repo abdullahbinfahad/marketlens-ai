@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MarketLens AI – OPC Intelligent Cross‑Border Product Assistant. AI‑powered product selection, real‑time market intelligence, and risk assessment for Silk Road e‑commerce.">
-    <meta name="keywords" content="MarketLens AI, OPC, cross‑border e‑commerce, AI agent, Silk Road, product selection, market intelligence, Jiangsu, Nanjing Tech University">
-    <meta property="og:title" content="MarketLens AI · Intelligent Cross‑Border Product Assistant">
-    <meta property="og:description" content="Empowering Silk Road e‑commerce with AI‑driven product discovery and market intelligence.">
+    <meta name="description" content="MarketLens AI – OPC智能跨境商品情报助手。AI驱动的选品、实时市场情报和风险评估，服务丝路电商。">
+    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学">
+    <meta property="og:title" content="MarketLens AI · 智能跨境商品情报助手">
+    <meta property="og:description" content="AI赋能丝路电商，提供选品决策、市场洞察与风险分析。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marketlens.ai">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://marketlens.ai">
-    <title>MarketLens AI – Smart Cross‑Border Product Intelligence</title>
+    <title>MarketLens AI – 智能跨境商品情报助手</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #090a16;
             --surface: #141629;
-            --card-bg: rgba(20, 22, 41, 0.8);
+            --card-bg: rgba(20, 22, 41, 0.85);
             --gold: #f5a623;
             --gold-light: #ffc940;
             --teal: #00d4aa;
@@ -40,12 +40,10 @@
             position: relative;
         }
 
-        /* Animated background canvas */
         #bgCanvas {
             position: fixed;
             top: 0; left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             z-index: -2;
             opacity: 0.35;
         }
@@ -58,7 +56,6 @@
             z-index: 1;
         }
 
-        /* ── Header ─────────────────── */
         .header {
             display: flex;
             justify-content: space-between;
@@ -88,7 +85,6 @@
         .uni-logo {
             width: 70px;
             height: auto;
-            /* original shape, no extra styling */
             border: none;
             background: none;
             padding: 0;
@@ -99,7 +95,6 @@
             transform: scale(1.05);
         }
 
-        /* ── Section Titles ─────────── */
         .section-title {
             font-size: 1.6rem;
             font-weight: 700;
@@ -116,7 +111,6 @@
             margin-left: 1rem;
         }
 
-        /* ── Overview ──────────────── */
         .overview-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -131,20 +125,38 @@
         .overview-card strong { color: var(--gold-light); }
         .overview-card em { color: var(--teal); font-style: normal; font-weight: 600; }
 
-        /* ── Core Capabilities Paragraph ──── */
-        .capabilities-text {
-            font-size: 1.05rem;
-            line-height: 1.75;
-            color: #c8ccd4;
+        /* Chinese capabilities */
+        .capabilities-container {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             border-radius: 18px;
             padding: 2rem;
             margin-bottom: 2.5rem;
+            transition: background 0.3s;
+        }
+        .capabilities-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c8ccd4;
+            transition: color 0.3s;
+        }
+        .capabilities-container:hover .capabilities-text {
+            color: #fff;
+        }
+        .highlight-word {
+            font-weight: 600;
+            color: var(--gold-light);
+            transition: all 0.3s, text-shadow 0.3s;
+            display: inline-block;
+            cursor: default;
+        }
+        .capabilities-container:hover .highlight-word {
+            color: #fff;
+            text-shadow: 0 0 12px var(--gold), 0 0 24px var(--gold-light);
         }
 
-        /* ── Team Cards ───────────── */
+        /* Team cards */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -153,7 +165,8 @@
         }
         .member-card {
             perspective: 800px;
-            height: 140px;
+            height: 180px;
+            cursor: pointer;
         }
         .card-inner {
             position: relative;
@@ -163,6 +176,10 @@
             transform-style: preserve-3d;
         }
         .member-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        /* for touch toggle */
+        .member-card.flipped .card-inner {
             transform: rotateY(180deg);
         }
         .card-front, .card-back {
@@ -204,15 +221,15 @@
             letter-spacing: 1px;
             margin-top: 0.4rem;
         }
-        .card-back .appreciation {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: var(--gold-light);
-            font-weight: 600;
+        .card-back .bio {
+            font-size: 0.85rem;
+            color: #e0e0e0;
             line-height: 1.5;
+            font-weight: 400;
+            padding: 0.2rem;
         }
 
-        /* ── Advisors ─────────────── */
+        /* Advisor 3D hover */
         .advisor-row {
             display: flex;
             flex-wrap: wrap;
@@ -226,25 +243,25 @@
             border-radius: 14px;
             padding: 1.3rem 1.5rem;
             flex: 1 1 250px;
-            transition: transform 0.25s, box-shadow 0.25s;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+            transform-style: preserve-3d;
+            perspective: 800px;
+            cursor: pointer;
         }
         .advisor-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0,212,170,0.15);
-            border-color: var(--teal);
+            transform: rotateY(4deg) rotateX(-2deg) scale(1.02);
+            box-shadow: 0 25px 40px rgba(0,212,170,0.2), 0 0 0 1px var(--teal);
         }
         .advisor-card .name { font-weight: 700; color: #fff; }
         .advisor-card .dept { font-size: 0.8rem; color: var(--teal); margin: 0.3rem 0; }
         .advisor-card .contact { font-size: 0.75rem; color: var(--muted); }
 
-        /* ── Countdown Bar (Red) ───── */
+        /* Red gradient countdown */
         .countdown-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             width: 100%;
-            background: #b71c1c;
-            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);
+            background: linear-gradient(135deg, #c62828, #b71c1c, #d32f2f);
             border-top: 1px solid rgba(255,255,255,0.15);
             padding: 0.7rem 2rem;
             display: flex;
@@ -278,7 +295,6 @@
             padding: 0.2rem 0.4rem;
         }
 
-        /* ── Footer ───────────────── */
         footer {
             text-align: center;
             padding: 1.2rem 0 4rem;
@@ -288,15 +304,16 @@
             margin-top: 1.5rem;
         }
 
-        /* ── Responsive ───────────── */
         @media (max-width: 768px) {
             .container { padding: 1rem; }
             .header { flex-direction: column-reverse; align-items: center; text-align: center; }
             .uni-logo { width: 55px; }
             .team-grid { grid-template-columns: 1fr 1fr; }
+            .member-card { height: 160px; }
         }
         @media (max-width: 480px) {
             .team-grid { grid-template-columns: 1fr; }
+            .member-card { height: 160px; }
         }
     </style>
 </head>
@@ -310,12 +327,11 @@
                 <p class="subtitle">Smart Cross‑Border Product Intelligence</p>
             </div>
             <img src="https://static.igem.wiki/teams/5322/logo/njtech.png"
-                 alt="Nanjing Tech University"
+                 alt="南京工业大学"
                  class="uni-logo"
                  loading="lazy">
         </header>
 
-        <!-- Overview -->
         <section>
             <h2 class="section-title">What We Build</h2>
             <div class="overview-card">
@@ -328,26 +344,27 @@
             </div>
         </section>
 
-        <!-- Core Capabilities (single paragraph flow) -->
         <section>
-            <h2 class="section-title">Core Capabilities</h2>
-            <div class="capabilities-text">
-                MarketLens AI integrates <strong>real‑time trend intelligence</strong> that forecasts demand signals across cross‑border platforms, 
-                <strong>AI‑powered sentiment mining</strong> that reads customer reviews to spot market gaps and competitor weaknesses, 
-                a <strong>dynamic scoring engine</strong> that balances demand, profit, risk, and competition using adaptive weights, 
-                a <strong>risk matrix</strong> that simulates tariff changes, shipping disruptions, and currency shifts, 
-                an <strong>interactive dashboard</strong> with 3D visualizations and live reports, 
-                and built‑in <strong>multi‑language AI assistance</strong> that helps sellers communicate with global audiences. 
-                Together, these capabilities create a complete intelligence backbone for modern Silk Road e‑commerce.
+            <h2 class="section-title">核心能力</h2>
+            <div class="capabilities-container">
+                <p class="capabilities-text">
+                    MarketLens AI 集成了
+                    <span class="highlight-word">实时趋势情报</span>，预测跨境平台的需求信号；
+                    <span class="highlight-word">AI 评论挖掘</span>，洞察市场缺口与竞争对手弱点；
+                    <span class="highlight-word">动态评分引擎</span>，平衡需求、利润、风险和竞争权重；
+                    <span class="highlight-word">风险矩阵</span>，模拟关税变化、物流中断与汇率波动；
+                    <span class="highlight-word">交互式仪表板</span>，提供 3D 可视化与实时报告；
+                    以及内建的 <span class="highlight-word">多语言 AI 助手</span>，帮助卖家与全球受众无缝沟通。
+                    这些能力共同构成现代丝路电商的完整情报中枢。
+                </p>
             </div>
         </section>
 
-        <!-- Team -->
         <section>
             <h2 class="section-title">The Team</h2>
-            <div class="team-grid">
+            <div class="team-grid" id="teamGrid">
                 <!-- Abdullah -->
-                <div class="member-card">
+                <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="name">Abdullah Bin Fahad</div>
@@ -355,12 +372,12 @@
                             <div class="role">Team Lead</div>
                         </div>
                         <div class="card-back">
-                            <div class="appreciation">An outstanding visionary studying at Nanjing Tech University, Abdullah brings clarity and determination to every challenge.</div>
+                            <div class="bio">Brings clarity and determination to every challenge.</div>
                         </div>
                     </div>
                 </div>
                 <!-- Rokeya -->
-                <div class="member-card">
+                <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="name">Rokeya Zaman</div>
@@ -368,12 +385,12 @@
                             <div class="role">Data Scientist</div>
                         </div>
                         <div class="card-back">
-                            <div class="appreciation">A dedicated and analytical mind from Nanjing Tech University, Rokeya transforms raw data into powerful insights.</div>
+                            <div class="bio">A dedicated and analytical mind from Nanjing Tech University, Rokeya transforms raw data into powerful insights with her business mind.</div>
                         </div>
                     </div>
                 </div>
                 <!-- Shayne -->
-                <div class="member-card">
+                <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="name">Shayne Lorraine</div>
@@ -381,40 +398,39 @@
                             <div class="role">Full‑Stack Dev</div>
                         </div>
                         <div class="card-back">
-                            <div class="appreciation">A creative problem‑solver at Nanjing Tech University, Shayne builds elegant and robust digital solutions.</div>
+                            <div class="bio">A creative problem‑solver at Nanjing Tech University, Shayne builds elegant and robust digital solutions with her robust technical skills.</div>
                         </div>
                     </div>
                 </div>
                 <!-- Revy -->
-                <div class="member-card">
+                <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="name">Revy Syawal Rizki</div>
                             <div class="major">Computer Science</div>
-                            <div class="role">Frontend & AI</div>
+                            <div class="role">Backend Engineer</div>
                         </div>
                         <div class="card-back">
-                            <div class="appreciation">An enthusiastic learner at Nanjing Tech University, Revy brings fresh ideas and a keen eye for user experience.</div>
+                            <div class="bio">An enthusiastic learner at Nanjing Tech University, Revy brings fresh ideas and a keen eye for user experience also an expert analytics and researcher.</div>
                         </div>
                     </div>
                 </div>
                 <!-- Brian -->
-                <div class="member-card">
+                <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
                             <div class="name">Brian Mavenrich</div>
                             <div class="major">Computer Science</div>
-                            <div class="role">Backend Engineer</div>
+                            <div class="role">Frontend & AI</div>
                         </div>
                         <div class="card-back">
-                            <div class="appreciation">A reliable and methodical thinker from Nanjing Tech University, Brian ensures every system runs smoothly and securely.</div>
+                            <div class="bio">A reliable and methodical thinker from Nanjing Tech University, Brian ensures every system runs smoothly and securely. Expert in Frontend and data entry.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Advisors -->
         <section>
             <h2 class="section-title">Faculty Advisors</h2>
             <div class="advisor-row">
@@ -432,9 +448,8 @@
         </section>
     </div>
 
-    <!-- Countdown bar (red background) -->
     <div class="countdown-bar">
-        <span class="label">🚀 Finals Showcase</span>
+        <span class="label">🚀 Finals Countdown</span>
         <div class="timer-digits" id="timerDigits"></div>
     </div>
 
@@ -443,69 +458,73 @@
     </footer>
 
     <script>
-        // ─── Animated Background (soft particle waves) ─────────
+        // Animated background
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         let w, h, particles;
-
         function resizeCanvas() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
-
         function createParticles() {
             particles = [];
-            const count = 80;
-            for (let i = 0; i < count; i++) {
+            for (let i=0; i<80; i++) {
                 particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    r: Math.random() * 3 + 1,
-                    dx: (Math.random() - 0.5) * 0.4,
-                    dy: (Math.random() - 0.5) * 0.4,
-                    hue: Math.random() < 0.5 ? 40 : 330
+                    x: Math.random()*w,
+                    y: Math.random()*h,
+                    r: Math.random()*3+1,
+                    dx: (Math.random()-0.5)*0.4,
+                    dy: (Math.random()-0.5)*0.4,
+                    hue: Math.random()<0.5?40:330
                 });
             }
         }
         createParticles();
-
         function drawParticles() {
-            ctx.clearRect(0, 0, w, h);
-            for (let p of particles) {
+            ctx.clearRect(0,0,w,h);
+            for(let p of particles) {
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                const color = p.hue === 40 ? `hsla(40, 90%, 65%, 0.7)` : `hsla(330, 80%, 65%, 0.7)`;
-                ctx.fillStyle = color;
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                ctx.fillStyle = p.hue===40 ? `hsla(40,90%,65%,0.7)` : `hsla(330,80%,65%,0.7)`;
                 ctx.fill();
-                p.x += p.dx;
-                p.y += p.dy;
-                if (p.x < 0 || p.x > w) p.dx *= -1;
-                if (p.y < 0 || p.y > h) p.dy *= -1;
+                p.x+=p.dx; p.y+=p.dy;
+                if(p.x<0||p.x>w) p.dx*=-1;
+                if(p.y<0||p.y>h) p.dy*=-1;
             }
             requestAnimationFrame(drawParticles);
         }
         drawParticles();
 
-        // ─── Countdown Timer ─────────────────────
-        const targetDate = new Date('2026-10-20T00:00:00+08:00').getTime();
-        const timerContainer = document.getElementById('timerDigits');
+        // Team card click toggle
+        const teamGrid = document.getElementById('teamGrid');
+        if (teamGrid) {
+            teamGrid.addEventListener('click', function(e) {
+                const card = e.target.closest('.member-card');
+                if (!card) return;
+                card.classList.toggle('flipped');
+            });
+        }
+
+        // Countdown
+        const target = new Date('2026-10-20T00:00:00+08:00').getTime();
+        const timer = document.getElementById('timerDigits');
         function updateTimer() {
             const now = Date.now();
-            const dist = targetDate - now;
-            if (dist <= 0) {
-                timerContainer.innerHTML = '<span class="timer-digit">00</span>d <span class="timer-digit">00</span>h <span class="timer-digit">00</span>m <span class="timer-digit">00</span>s';
+            const dist = target - now;
+            if(dist<=0) {
+                timer.innerHTML = '<span class="timer-digit">00</span>d <span class="timer-digit">00</span>h <span class="timer-digit">00</span>m <span class="timer-digit">00</span>s';
                 return;
             }
-            const days = Math.floor(dist / (1000*60*60*24));
-            const hours = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
-            const mins = Math.floor((dist % (1000*60*60)) / (1000*60));
-            const secs = Math.floor((dist % (1000*60)) / 1000);
-            timerContainer.innerHTML = `<span class="timer-digit">${String(days).padStart(2,'0')}</span>d
-                                         <span class="timer-digit">${String(hours).padStart(2,'0')}</span>h
-                                         <span class="timer-digit">${String(mins).padStart(2,'0')}</span>m
-                                         <span class="timer-digit">${String(secs).padStart(2,'0')}</span>s`;
+            const d = Math.floor(dist/86400000);
+            const h = Math.floor((dist%86400000)/3600000);
+            const m = Math.floor((dist%3600000)/60000);
+            const s = Math.floor((dist%60000)/1000);
+            timer.innerHTML = `<span class="timer-digit">${String(d).padStart(2,'0')}</span>d
+                               <span class="timer-digit">${String(h).padStart(2,'0')}</span>h
+                               <span class="timer-digit">${String(m).padStart(2,'0')}</span>m
+                               <span class="timer-digit">${String(s).padStart(2,'0')}</span>s`;
         }
         updateTimer();
         setInterval(updateTimer, 1000);
