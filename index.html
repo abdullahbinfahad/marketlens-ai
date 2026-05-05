@@ -3,351 +3,768 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketLens AI | OPC Intelligent Cross-Border Product Assistant</title>
+    <title>MarketLens AI · OPC Intelligent Cross‑Border Product Assistant</title>
     <style>
+        :root {
+            --bg: #06090f;
+            --surface: #0d1117;
+            --card-bg: rgba(22, 27, 36, 0.75);
+            --gold: #f0a500;
+            --gold-light: #ffc940;
+            --teal: #00d4aa;
+            --teal-glow: #00ffc8;
+            --coral: #ff6b6b;
+            --text: #e8e8e8;
+            --muted: #8b949e;
+            --border: rgba(255, 255, 255, 0.06);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            background: #0B0C10;
-            color: #E0E0E0;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
+        /* Animated gradient mesh background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 30%, rgba(240, 165, 0, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 70%, rgba(0, 212, 170, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 50% 50%, rgba(255, 107, 107, 0.03) 0%, transparent 70%);
+            animation: bgShift 20s ease-in-out infinite alternate;
+        }
+        @keyframes bgShift {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-3%, 2%) scale(1.08);
+            }
+        }
+
+        /* Subtle dot grid overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 1.5rem 2rem;
         }
 
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0 2rem;
-            animation: fadeIn 1s ease;
+        /* ── Header ─────────────────────── */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding-top: 0.5rem;
+            margin-bottom: 2rem;
         }
-        .hero h1 {
-            font-size: 3.5rem;
+        .header-left h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 800;
             letter-spacing: -1px;
-            background: linear-gradient(135deg, #F5A623, #45A29E);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--coral) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
+            line-height: 1.15;
         }
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: #B0B0B0;
+        .header-left .tagline {
+            color: var(--muted);
+            font-size: 0.95rem;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             font-weight: 500;
+            margin-top: 0.3rem;
         }
-        .hero .university {
-            font-size: 1rem;
-            color: #45A29E;
-            margin-top: 0.5rem;
+        .header-right {
+            flex-shrink: 0;
+        }
+        .uni-logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        .uni-logo:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 24px rgba(240, 165, 0, 0.3);
+            transform: rotate(-6deg) scale(1.08);
         }
 
-        /* Section titles */
+        /* ── Section titles ─────────────── */
         .section-title {
-            font-size: 2rem;
+            font-size: 1.7rem;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #F5A623;
-            position: relative;
-            display: inline-block;
+            color: #fff;
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
         .section-title::after {
             content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: #45A29E;
-            border-radius: 2px;
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+            min-width: 40px;
         }
 
-        /* Card grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        .card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
+        /* ── Glass card base ────────────── */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
             padding: 1.8rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: default;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 35px rgba(245,166,35,0.15), 0 0 0 1px rgba(69,162,158,0.3);
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.35s;
+            pointer-events: none;
+            z-index: 0;
         }
-        .card h3 {
-            color: #F5A623;
-            margin-bottom: 0.7rem;
-            font-size: 1.3rem;
+        .glass-card:hover::before {
+            opacity: 1;
         }
-        .card p {
-            color: #C5C6C7;
-            font-size: 0.95rem;
+        .glass-card>* {
+            position: relative;
+            z-index: 1;
         }
 
-        /* Team & Advisor list */
-        .member-list {
+        /* ── Feature grid ───────────────── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.4rem;
+            margin-bottom: 2.5rem;
+        }
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.4rem;
+            transition: var(--transition);
+            cursor: default;
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+        .feature-card:hover {
+            border-color: rgba(240, 165, 0, 0.35);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(240, 165, 0, 0.15);
+            transform: translateY(-6px);
+        }
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.7rem;
+        }
+        .feature-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 0.4rem;
+        }
+        .feature-card p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* ── Team grid ──────────────────── */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .member-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            perspective: 600px;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .member-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            border: 2px solid transparent;
+            transition: border-color 0.35s;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .member-card:hover::after {
+            border-color: rgba(240, 165, 0, 0.5);
+        }
+        .member-card .member-top {
+            position: relative;
+            z-index: 1;
+        }
+        .member-card .name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 0.15rem;
+        }
+        .member-card .major {
+            font-size: 0.82rem;
+            color: var(--teal);
+            font-weight: 500;
+        }
+        .member-card .role-badge {
+            display: inline-block;
+            background: rgba(240, 165, 0, 0.15);
+            color: var(--gold-light);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        .member-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), margin-top 0.45s, opacity 0.35s;
+            opacity: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .member-card.expanded .member-details {
+            max-height: 140px;
+            margin-top: 0.8rem;
+            opacity: 1;
+        }
+        .member-details .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 0.35rem;
+            word-break: break-all;
+        }
+        .member-details .detail-row span {
+            color: #c0c0c0;
+        }
+        .member-details .detail-row .label-icon {
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* ── Advisor cards ──────────────── */
+        .advisor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .advisor-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.6rem;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            perspective: 600px;
+        }
+        .advisor-card:hover {
+            border-color: rgba(0, 212, 170, 0.4);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 212, 170, 0.12);
+            transform: translateY(-4px);
+        }
+        .advisor-card .advisor-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        .advisor-card .advisor-dept {
+            font-size: 0.85rem;
+            color: var(--teal);
+            margin-bottom: 0.35rem;
+        }
+        .advisor-card .advisor-contact {
+            font-size: 0.8rem;
+            color: var(--muted);
             display: flex;
             flex-wrap: wrap;
-            gap: 1.2rem;
-            justify-content: center;
-        }
-        .member {
-            background: rgba(69,162,158,0.08);
-            border: 1px solid rgba(69,162,158,0.2);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            text-align: center;
-            min-width: 160px;
-            transition: transform 0.25s, background 0.25s;
-        }
-        .member:hover {
-            transform: scale(1.04);
-            background: rgba(245,166,35,0.12);
-            border-color: #F5A623;
-        }
-        .member .name {
-            font-weight: 700;
-            color: #FFFFFF;
-            font-size: 1.05rem;
-        }
-        .member .role {
-            font-size: 0.85rem;
-            color: #45A29E;
-            margin-top: 0.2rem;
+            gap: 0.6rem;
+            margin-top: 0.4rem;
         }
 
-        /* Countdown widget (fixed bottom right) */
-        .countdown-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(11,12,16,0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(245,166,35,0.3);
-            border-radius: 14px;
-            padding: 1rem 1.4rem;
-            text-align: center;
-            z-index: 999;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        /* ── Overview card ──────────────── */
+        .overview-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #c8ccd4;
         }
-        .countdown-widget .title {
+        .overview-card strong {
+            color: var(--gold-light);
+        }
+        .overview-card em {
+            color: var(--teal-glow);
+            font-style: normal;
+        }
+
+        /* ── Countdown section ──────────── */
+        .countdown-section {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1.5rem;
+        }
+        .countdown-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(240, 165, 0, 0.25);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .countdown-box .cd-label {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #B0B0B0;
-            margin-bottom: 0.5rem;
+            color: var(--muted);
+            white-space: nowrap;
         }
         .countdown-timer {
             display: flex;
-            gap: 0.6rem;
-            justify-content: center;
+            gap: 0.5rem;
         }
-        .timer-box {
-            background: rgba(255,255,255,0.06);
-            border-radius: 8px;
-            padding: 0.5rem 0.8rem;
-            min-width: 50px;
+        .cd-unit {
+            text-align: center;
+            min-width: 48px;
         }
-        .timer-box .number {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #F5A623;
+        .cd-unit .cd-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gold-light);
             line-height: 1;
+            font-variant-numeric: tabular-nums;
+            font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', monospace;
         }
-        .timer-box .label {
-            font-size: 0.65rem;
-            color: #8A8A8A;
+        .cd-unit .cd-lbl {
+            font-size: 0.62rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
         }
 
-        /* Footer */
+        /* ── 3D Tilt (JS‑driven) ────────── */
+        .tiltable {
+            will-change: transform;
+        }
+
+        /* ── Expand hint ────────────────── */
+        .expand-hint {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.78rem;
+            margin-top: 0.8rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        /* ── Footer ─────────────────────── */
         footer {
             text-align: center;
-            padding: 2rem 0;
-            color: #6C6C6C;
-            font-size: 0.9rem;
-            margin-top: 3rem;
+            padding: 1.5rem 0;
+            color: #555;
+            font-size: 0.82rem;
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
         }
 
-        /* Responsive */
+        /* ── Responsive ─────────────────── */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
+            .container {
+                padding: 1rem 1.2rem;
             }
-            .member-list {
-                flex-direction: column;
+            .header {
+                flex-direction: column-reverse;
                 align-items: center;
+                text-align: center;
             }
-            .countdown-widget {
-                bottom: 10px;
-                right: 10px;
-                padding: 0.8rem 1rem;
+            .header-left h1 {
+                font-size: 1.8rem;
             }
-            .timer-box .number {
-                font-size: 1.2rem;
+            .uni-logo {
+                width: 50px;
+                height: 50px;
+            }
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.8rem;
+            }
+            .member-card {
+                padding: 1rem;
+            }
+            .member-card .name {
+                font-size: 0.92rem;
+            }
+            .countdown-box {
+                padding: 1rem 1.4rem;
+                justify-content: center;
+            }
+            .cd-unit .cd-num {
+                font-size: 1.3rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .advisor-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.3rem;
             }
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 400px) {
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.6rem;
+            }
+            .member-card {
+                padding: 0.8rem;
+            }
+            .member-card .name {
+                font-size: 0.82rem;
+            }
+            .member-card .major {
+                font-size: 0.7rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Hero -->
-        <header class="hero">
-            <h1>MarketLens AI</h1>
-            <p class="subtitle">OPC Intelligent Cross‑Border Product Assistant</p>
-            <p class="university">Nanjing Tech University · OPC Intelligent Agent Innovation Track</p>
+        <!-- ═══════════ HEADER ═══════════ -->
+        <header class="header">
+            <div class="header-left">
+                <h1>MarketLens AI</h1>
+                <p class="tagline">OPC Intelligent Cross‑Border Product Assistant</p>
+            </div>
+            <div class="header-right">
+                <img class="uni-logo"
+                src="https://static.igem.wiki/teams/5322/logo/njtech.png"
+                alt="Nanjing Tech University"
+                loading="lazy"
+                title="Nanjing Tech University">
+            </div>
         </header>
 
-        <!-- Project Overview -->
+        <!-- ═══════════ PROJECT OVERVIEW ═══════════ -->
         <section>
             <h2 class="section-title">📌 Project Overview</h2>
-            <div class="card" style="max-width:800px;margin:0 auto;">
-                <p style="font-size:1.05rem;">
-                    MarketLens AI is an AI‑powered decision‑support system built for the Silk Road e‑commerce ecosystem. 
-                    It addresses core pain points in cross‑border trade: intelligent product selection, real‑time overseas market analysis, 
-                    multi‑lingual customer service, supply chain risk forecasting, and automated compliance. 
-                    By fusing large language models, predictive analytics, and a dynamic weighted scoring engine, 
-                    we deliver a one‑stop smart assistant that empowers Jiangsu exporters to go global with confidence.
+            <div class="overview-card">
+                <p>
+                    <strong>MarketLens AI</strong> is a next‑generation
+                    <em>OPC (AI‑Agent) intelligent decision‑support system</em>
+                    purpose‑built for Silk Road cross‑border e‑commerce.
+                    It tackles the hardest problems in global trade:
+                    <strong>what to sell, where to sell it, and how to win.</strong>
+                    By fusing <em>LLM‑powered review mining</em>, real‑time
+                    <strong>trend forecasting</strong>, a
+                    <strong>dynamic weighted scoring engine</strong>, and
+                    <strong>Monte‑Carlo risk simulation</strong>,
+                    MarketLens AI delivers a single, trustworthy
+                    <em>Opportunity Score</em> — so Jiangsu exporters can
+                    launch with confidence on the global stage.
                 </p>
             </div>
         </section>
 
-        <!-- Key Features -->
-        <section style="margin-top:3rem;">
+        <!-- ═══════════ CORE FEATURES ═══════════ -->
+        <section>
             <h2 class="section-title">⚡ Core Features</h2>
-            <div class="card-grid">
-                <div class="card">
+            <div class="feature-grid">
+                <div class="feature-card tiltable">
+                    <div class="icon">📊</div>
                     <h3>Trend Intelligence</h3>
-                    <p>Real‑time demand signals from Google Trends & cross‑border platforms, with 30‑day forecasting.</p>
+                    <p>Real‑time demand signals from Google Trends & cross‑border platforms with 30‑day forecasting.</p>
                 </div>
-                <div class="card">
+                <div class="feature-card tiltable">
+                    <div class="icon">🧠</div>
                     <h3>AI Sentiment Mining</h3>
-                    <p>LLM‑powered review analysis to uncover market gaps and competitor weaknesses.</p>
+                    <p>LLM review analysis to uncover market gaps, unmet needs, and competitor weaknesses.</p>
                 </div>
-                <div class="card">
+                <div class="feature-card tiltable">
+                    <div class="icon">⚖️</div>
                     <h3>Dynamic Scoring Engine</h3>
-                    <p>Weighted multi‑factor model (demand, profit, risk, competition) auto‑tuned for each market.</p>
+                    <p>Bayesian‑optimized weights for demand, profit, risk & competition — auto‑tuned per market.</p>
                 </div>
-                <div class="card">
-                    <h3>Risk Matrix</h3>
-                    <p>Monte Carlo simulations for tariff, logistics, and currency volatility.</p>
+                <div class="feature-card tiltable">
+                    <div class="icon">🛡️</div>
+                    <h3>Risk Matrix 2.0</h3>
+                    <p>Monte‑Carlo simulations for tariff shocks, logistics delays, and currency volatility.</p>
                 </div>
-                <div class="card">
+                <div class="feature-card tiltable">
+                    <div class="icon">📈</div>
                     <h3>Interactive Dashboard</h3>
-                    <p>Streamlit‑powered cockpit with 3D visualizations, dynamic gauges, and exportable reports.</p>
+                    <p>Streamlit cockpit with 3D charts, dynamic gauges, heatmaps, and exportable reports.</p>
                 </div>
-                <div class="card">
-                    <h3>Multi‑language Ready</h3>
-                    <p>Built‑in multi‑lingual AI customer service for seamless global communication.</p>
+                <div class="feature-card tiltable">
+                    <div class="icon">🌍</div>
+                    <h3>Multi‑Language Ready</h3>
+                    <p>Built‑in multilingual AI customer service for seamless global communication.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Team Members -->
-        <section style="margin-top:3rem;">
+        <!-- ═══════════ TEAM MEMBERS ═══════════ -->
+        <section>
             <h2 class="section-title">👥 Team MarketLens AI</h2>
-            <div class="member-list">
-                <div class="member">
-                    <div class="name">Abdullah Bin Fahad (Captain)</div>
-                    <div class="role">Automation Engineering</div>
+            <p class="expand-hint">🖱️ Click any card to reveal contact details</p>
+            <div class="team-grid" id="teamGrid">
+                <!-- Abdullah (Captain) -->
+                <div class="member-card tiltable" data-email="abdullahbinfahad.abf@gmail.com" data-phone="18105180247">
+                    <div class="member-top">
+                        <div class="name">Abdullah Bin Fahad</div>
+                        <div class="major">Automation Engineering</div>
+                        <span class="role-badge">Team Captain</span>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row"><span class="label-icon">📧</span><span>abdullahbinfahad.abf@gmail.com</span></div>
+                        <div class="detail-row"><span class="label-icon">📱</span><span>18105180247</span></div>
+                    </div>
                 </div>
-                <div class="member">
-                    <div class="name">Rokeya Zaman</div>
-                    <div class="role">Automation Engineering</div>
+                <!-- Rokeya -->
+                <div class="member-card tiltable" data-email="taharotaha@gmail.com" data-phone="19822630783">
+                    <div class="member-top">
+                        <div class="name">Rokeya Zaman</div>
+                        <div class="major">Automation Engineering</div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row"><span class="label-icon">📧</span><span>taharotaha@gmail.com</span></div>
+                        <div class="detail-row"><span class="label-icon">📱</span><span>19822630783</span></div>
+                    </div>
                 </div>
-                <div class="member">
-                    <div class="name">Shayne Lorraine</div>
-                    <div class="role">Computer Science</div>
+                <!-- Shayne -->
+                <div class="member-card tiltable" data-email="shayne291006@gmail.com" data-phone="15005184326">
+                    <div class="member-top">
+                        <div class="name">Shayne Lorraine</div>
+                        <div class="major">Computer Science</div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row"><span class="label-icon">📧</span><span>shayne291006@gmail.com</span></div>
+                        <div class="detail-row"><span class="label-icon">📱</span><span>15005184326</span></div>
+                    </div>
                 </div>
-                <div class="member">
-                    <div class="name">Revy Syawal Rizki</div>
-                    <div class="role">Computer Science</div>
+                <!-- Revy -->
+                <div class="member-card tiltable" data-email="revysyawalrizki@gmail.com" data-phone="18851051269">
+                    <div class="member-top">
+                        <div class="name">Revy Syawal Rizki</div>
+                        <div class="major">Computer Science</div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row"><span class="label-icon">📧</span><span>revysyawalrizki@gmail.com</span></div>
+                        <div class="detail-row"><span class="label-icon">📱</span><span>18851051269</span></div>
+                    </div>
                 </div>
-                <div class="member">
-                    <div class="name">Brian Mavenrich</div>
-                    <div class="role">Computer Science</div>
+                <!-- Brian -->
+                <div class="member-card tiltable" data-email="brianmavenrich1756@gmail.com" data-phone="18851907759">
+                    <div class="member-top">
+                        <div class="name">Brian Mavenrich</div>
+                        <div class="major">Computer Science</div>
+                    </div>
+                    <div class="member-details">
+                        <div class="detail-row"><span class="label-icon">📧</span><span>brianmavenrich1756@gmail.com</span></div>
+                        <div class="detail-row"><span class="label-icon">📱</span><span>18851907759</span></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Instructors -->
-        <section style="margin-top:3rem;">
+        <!-- ═══════════ ADVISORS ═══════════ -->
+        <section>
             <h2 class="section-title">🎓 Faculty Advisors</h2>
-            <div class="member-list">
-                <div class="member">
-                    <div class="name">刘琬 (Liu Wan)</div>
-                    <div class="role">Overseas Education College, Nanjing Tech University</div>
+            <div class="advisor-grid">
+                <div class="advisor-card tiltable">
+                    <div class="advisor-name">刘琬 &nbsp;·&nbsp; Liu Wan</div>
+                    <div class="advisor-dept">Overseas Education College</div>
+                    <div class="advisor-contact">
+                        <span>📧 liuliu@njtech.edu.cn</span>
+                        <span>📱 13813010348</span>
+                    </div>
                 </div>
-                <div class="member">
-                    <div class="name">张军强 (Zhang Junqiang)</div>
-                    <div class="role">School of Computer Science, Nanjing Tech University</div>
+                <div class="advisor-card tiltable">
+                    <div class="advisor-name">张军强 &nbsp;·&nbsp; Zhang Junqiang</div>
+                    <div class="advisor-dept">School of Computer Science</div>
+                    <div class="advisor-contact">
+                        <span>📧 zjunqiang@126.com</span>
+                        <span>📱 13451823013</span>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- ═══════════ COUNTDOWN ═══════════ -->
+        <section class="countdown-section">
+            <div class="countdown-box">
+                <span class="cd-label">🚀 Finals Showcase</span>
+                <div class="countdown-timer">
+                    <div class="cd-unit"><div class="cd-num" id="cd-days">00</div><div class="cd-lbl">Days</div></div>
+                    <div class="cd-unit"><div class="cd-num" id="cd-hours">00</div><div class="cd-lbl">Hrs</div></div>
+                    <div class="cd-unit"><div class="cd-num" id="cd-mins">00</div><div class="cd-lbl">Min</div></div>
+                    <div class="cd-unit"><div class="cd-num" id="cd-secs">00</div><div class="cd-lbl">Sec</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ FOOTER ═══════════ -->
+        <footer>
+            <p>© 2026 MarketLens AI · Nanjing Tech University · OPC Intelligent Agent Innovation Track</p>
+        </footer>
     </div>
 
-    <!-- Countdown Widget (bottom right) -->
-    <div class="countdown-widget">
-        <div class="title">🚀 Finals Showcase</div>
-        <div class="countdown-timer">
-            <div class="timer-box"><div class="number" id="days">00</div><div class="label">Days</div></div>
-            <div class="timer-box"><div class="number" id="hours">00</div><div class="label">Hrs</div></div>
-            <div class="timer-box"><div class="number" id="minutes">00</div><div class="label">Min</div></div>
-            <div class="timer-box"><div class="number" id="seconds">00</div><div class="label">Sec</div></div>
-        </div>
-    </div>
-
-    <footer>
-        <p>© 2026 MarketLens AI – Nanjing Tech University. All rights reserved.</p>
-    </footer>
-
+    <!-- ═══════════ SCRIPTS ═══════════ -->
     <script>
-        // Countdown to October 20, 2026 00:00:00 (China time)
-        const target = new Date('2026-10-20T00:00:00+08:00').getTime();
-        function updateCountdown() {
-            const now = Date.now();
-            const dist = target - now;
-            if (dist < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
+        (function() {
+            // ── 1. Expandable member cards ──────────────────
+            const teamGrid = document.getElementById('teamGrid');
+            if (teamGrid) {
+                teamGrid.addEventListener('click', function(e) {
+                    const card = e.target.closest('.member-card');
+                    if (!card) return;
+                    // Toggle only the clicked card; collapse others
+                    const allCards = teamGrid.querySelectorAll('.member-card');
+                    allCards.forEach(c => {
+                        if (c !== card) c.classList.remove('expanded');
+                    });
+                    card.classList.toggle('expanded');
+                });
             }
-            const days = Math.floor(dist / (1000*60*60*24));
-            const hours = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
-            const mins = Math.floor((dist % (1000*60*60)) / (1000*60));
-            const secs = Math.floor((dist % (1000*60)) / 1000);
-            document.getElementById('days').textContent = String(days).padStart(2,'0');
-            document.getElementById('hours').textContent = String(hours).padStart(2,'0');
-            document.getElementById('minutes').textContent = String(mins).padStart(2,'0');
-            document.getElementById('seconds').textContent = String(secs).padStart(2,'0');
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
+
+            // ── 2. Custom 3D tilt (no library) ──────────────
+            const tiltables = document.querySelectorAll('.tiltable');
+            tiltables.forEach(el => {
+                el.addEventListener('mousemove', function(e) {
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // px from left
+                    const y = e.clientY - rect.top; // px from top
+                    const cx = rect.width / 2;
+                    const cy = rect.height / 2;
+                    const dx = (x - cx) / cx; // -1 … 1
+                    const dy = (y - cy) / cy; // -1 … 1
+                    const maxTilt = 10; // degrees
+                    const rotateY = dx * maxTilt;
+                    const rotateX = -dy * maxTilt;
+                    el.style.transform =
+                        `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`;
+                    // Update glow origin
+                    const px = ((x / rect.width) * 100).toFixed(1);
+                    const py = ((y / rect.height) * 100).toFixed(1);
+                    el.style.setProperty('--mx', px + '%');
+                    el.style.setProperty('--my', py + '%');
+                });
+                el.addEventListener('mouseleave', function() {
+                    el.style.transform =
+                        'perspective(600px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                    el.style.setProperty('--mx', '50%');
+                    el.style.setProperty('--my', '50%');
+                });
+            });
+
+            // ── 3. Countdown → Oct 20, 2026 00:00 CST ──────
+            const target = new Date('2026-10-20T00:00:00+08:00').getTime();
+
+            function tick() {
+                const now = Date.now();
+                const dist = target - now;
+                if (dist <= 0) {
+                    ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.textContent = '00';
+                    });
+                    return;
+                }
+                const days = Math.floor(dist / 86400000);
+                const hours = Math.floor((dist % 86400000) / 3600000);
+                const mins = Math.floor((dist % 3600000) / 60000);
+                const secs = Math.floor((dist % 60000) / 1000);
+                const set = (id, v) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = String(v).padStart(2, '0');
+                };
+                set('cd-days', days);
+                set('cd-hours', hours);
+                set('cd-mins', mins);
+                set('cd-secs', secs);
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
     </script>
 </body>
 </html>
