@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MarketLens AI – OPC智能跨境商品情报助手。AI驱动的选品、实时市场情报和风险评估，服务丝路电商。">
-    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学">
+    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学, Abdullah Bin Fahad, 明远">
     <meta property="og:title" content="MarketLens AI · 智能跨境商品情报助手">
     <meta property="og:description" content="AI赋能丝路电商，提供选品决策、市场洞察与风险分析。">
     <meta property="og:type" content="website">
@@ -40,7 +40,14 @@
             position: relative;
         }
 
-        /* Animated particles background */
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 8px rgba(245,166,35,0.5), 0 0 16px rgba(245,166,35,0.2); }
+            100% { text-shadow: 0 0 18px rgba(245,166,35,0.8), 0 0 30px rgba(245,166,35,0.4); }
+        }
+        .glow-text {
+            animation: pulse-glow 2s infinite alternate;
+        }
+
         #bgCanvas {
             position: fixed;
             top: 0; left: 0;
@@ -55,15 +62,6 @@
             padding: 1.5rem 2rem;
             position: relative;
             z-index: 1;
-        }
-
-        /* Glow animation */
-        @keyframes pulse-glow {
-            0% { text-shadow: 0 0 8px rgba(245,166,35,0.5), 0 0 16px rgba(245,166,35,0.2); }
-            100% { text-shadow: 0 0 18px rgba(245,166,35,0.8), 0 0 30px rgba(245,166,35,0.4); }
-        }
-        .glow-text {
-            animation: pulse-glow 2s infinite alternate;
         }
 
         .header {
@@ -136,7 +134,6 @@
         .overview-card strong { color: var(--gold-light); }
         .overview-card em { color: var(--teal); font-style: normal; font-weight: 600; }
 
-        /* Chinese capabilities with hover text glow */
         .capabilities-container {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -168,7 +165,6 @@
             text-shadow: 0 0 16px var(--gold), 0 0 30px var(--gold-light);
         }
 
-        /* Team cards */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -248,7 +244,6 @@
             padding: 0.2rem;
         }
 
-        /* Advisor 3D hover */
         .advisor-row {
             display: flex;
             flex-wrap: wrap;
@@ -279,7 +274,6 @@
         .advisor-card .dept { font-size: 0.8rem; color: var(--teal); margin: 0.3rem 0; }
         .advisor-card .contact { font-size: 0.75rem; color: var(--muted); }
 
-        /* Red gradient countdown with rich image-like background */
         .countdown-bar {
             position: fixed;
             bottom: 0; left: 0;
@@ -368,7 +362,7 @@
                 <p>
                     <strong>MarketLens AI</strong> is an <em>AI‑powered decision agent</em> designed for the realities of Silk Road e‑commerce.
                     It solves the single biggest question facing cross‑border sellers today: <strong>what product will succeed in which market?</strong>
-                    By combining real‑time trend data, LLM‑driven review analysis, and a dynamic scoring engine, MarketLens turns uncertainty into a clear, ranked opportunity.
+                    By combining real‑time trend data, LLM‑driven review analysis (powered by advanced AI models such as DeepSeek), and a dynamic scoring engine, MarketLens turns uncertainty into a clear, ranked opportunity.
                     It’s not just a tool — it’s a co‑pilot for global trade, built to help Jiangsu exporters move faster, smarter, and with confidence.
                 </p>
             </div>
@@ -393,17 +387,17 @@
         <section>
             <h2 class="section-title">The Team</h2>
             <div class="team-grid" id="teamGrid">
-                <!-- Abdullah -->
+                <!-- Abdullah – Team Leader (Captain) -->
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="name glow-text">Abdullah Bin Fahad</div>
-                            <div class="chinese-name">(明远)</div>
+                            <div class="name glow-text" style="font-size:1.4rem; text-shadow: 0 0 15px rgba(255,200,0,0.9);">Abdullah Bin Fahad</div>
+                            <div class="chinese-name" style="color:#ffd966;">(明远)</div>
                             <div class="major">Automation Engineering</div>
-                            <div class="role">Team Lead</div>
+                            <div class="role" style="font-weight:bold;">★ Team Captain</div>
                         </div>
                         <div class="card-back">
-                            <div class="bio">Brings clarity and determination to every challenge.</div>
+                            <div class="bio">Visionary leader who brings clarity, determination, and a strong AI strategy to the project. Drives the OPC intelligent agent concept from idea to implementation.</div>
                         </div>
                     </div>
                 </div>
@@ -414,7 +408,7 @@
                             <div class="name glow-text">Rokeya Zaman</div>
                             <div class="chinese-name">(洛娅)</div>
                             <div class="major">Automation Engineering</div>
-                            <div class="role">Data Scientist</div>
+                            <div class="role">Data Scientist & AI</div>
                         </div>
                         <div class="card-back">
                             <div class="bio">A dedicated and analytical mind from Nanjing Tech University, Rokeya transforms raw data into powerful insights with her business mind.</div>
@@ -456,7 +450,7 @@
                             <div class="name glow-text">Brian Mavenrich</div>
                             <div class="chinese-name">(吴魏亮)</div>
                             <div class="major">Computer Science</div>
-                            <div class="role">Frontend & AI</div>
+                            <div class="role">Frontend & Data Analytics</div>
                         </div>
                         <div class="card-back">
                             <div class="bio">A reliable and methodical thinker from Nanjing Tech University, Brian ensures every system runs smoothly and securely. Expert in Frontend and data entry.</div>
@@ -497,12 +491,14 @@
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         let w, h, particles;
+
         function resizeCanvas() {
             w = canvas.width = window.innerWidth;
             h = canvas.height = window.innerHeight;
         }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
+
         function createParticles() {
             particles = [];
             for (let i=0; i<80; i++) {
@@ -517,6 +513,7 @@
             }
         }
         createParticles();
+
         function drawParticles() {
             ctx.clearRect(0,0,w,h);
             for(let p of particles) {
