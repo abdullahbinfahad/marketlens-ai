@@ -40,6 +40,7 @@
             position: relative;
         }
 
+        /* Animated particles background */
         #bgCanvas {
             position: fixed;
             top: 0; left: 0;
@@ -54,6 +55,15 @@
             padding: 1.5rem 2rem;
             position: relative;
             z-index: 1;
+        }
+
+        /* Glow animation */
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 8px rgba(245,166,35,0.5), 0 0 16px rgba(245,166,35,0.2); }
+            100% { text-shadow: 0 0 18px rgba(245,166,35,0.8), 0 0 30px rgba(245,166,35,0.4); }
+        }
+        .glow-text {
+            animation: pulse-glow 2s infinite alternate;
         }
 
         .header {
@@ -74,6 +84,7 @@
             background-clip: text;
             line-height: 1.1;
             margin-bottom: 0.3rem;
+            animation: pulse-glow 2s infinite alternate;
         }
         .hero-text .subtitle {
             font-size: 1rem;
@@ -125,7 +136,7 @@
         .overview-card strong { color: var(--gold-light); }
         .overview-card em { color: var(--teal); font-style: normal; font-weight: 600; }
 
-        /* Chinese capabilities */
+        /* Chinese capabilities with hover text glow */
         .capabilities-container {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
@@ -150,22 +161,23 @@
             transition: all 0.3s, text-shadow 0.3s;
             display: inline-block;
             cursor: default;
+            text-shadow: 0 0 8px rgba(245,166,35,0.5);
         }
         .capabilities-container:hover .highlight-word {
             color: #fff;
-            text-shadow: 0 0 12px var(--gold), 0 0 24px var(--gold-light);
+            text-shadow: 0 0 16px var(--gold), 0 0 30px var(--gold-light);
         }
 
         /* Team cards */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1.2rem;
             margin-bottom: 2.5rem;
         }
         .member-card {
             perspective: 800px;
-            height: 180px;
+            height: 200px;
             cursor: pointer;
         }
         .card-inner {
@@ -178,7 +190,6 @@
         .member-card:hover .card-inner {
             transform: rotateY(180deg);
         }
-        /* for touch toggle */
         .member-card.flipped .card-inner {
             transform: rotateY(180deg);
         }
@@ -205,9 +216,17 @@
         }
         .card-front .name {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #fff;
             margin-bottom: 0.2rem;
+            text-shadow: 0 0 10px rgba(255,200,0,0.7);
+        }
+        .card-front .chinese-name {
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+            text-shadow: 0 0 6px rgba(255,200,0,0.5);
         }
         .card-front .major {
             font-size: 0.8rem;
@@ -215,14 +234,14 @@
             font-weight: 500;
         }
         .card-front .role {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--gold-light);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 0.4rem;
         }
         .card-back .bio {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #e0e0e0;
             line-height: 1.5;
             font-weight: 400;
@@ -252,16 +271,25 @@
             transform: rotateY(4deg) rotateX(-2deg) scale(1.02);
             box-shadow: 0 25px 40px rgba(0,212,170,0.2), 0 0 0 1px var(--teal);
         }
-        .advisor-card .name { font-weight: 700; color: #fff; }
+        .advisor-card .name {
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255,200,0,0.5);
+        }
         .advisor-card .dept { font-size: 0.8rem; color: var(--teal); margin: 0.3rem 0; }
         .advisor-card .contact { font-size: 0.75rem; color: var(--muted); }
 
-        /* Red gradient countdown */
+        /* Red gradient countdown with rich image-like background */
         .countdown-bar {
             position: fixed;
             bottom: 0; left: 0;
             width: 100%;
-            background: linear-gradient(135deg, #c62828, #b71c1c, #d32f2f);
+            background: #b71c1c;
+            background-image:
+                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 1px, transparent 1px),
+                radial-gradient(circle at 70% 60%, rgba(0,0,0,0.2) 2px, transparent 2px),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 30px);
+            background-size: 40px 40px, 60px 60px, auto;
             border-top: 1px solid rgba(255,255,255,0.15);
             padding: 0.7rem 2rem;
             display: flex;
@@ -278,21 +306,23 @@
         .countdown-bar .label {
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #ffcdd2;
+            text-shadow: 0 0 8px rgba(255,255,255,0.6);
         }
         .timer-digits {
             display: flex;
             gap: 0.8rem;
         }
         .timer-digit {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-family: 'Inter', monospace;
             font-weight: 700;
             color: #fff;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
             border-radius: 6px;
-            padding: 0.2rem 0.4rem;
+            padding: 0.2rem 0.5rem;
+            text-shadow: 0 0 12px rgba(255,200,0,0.7);
         }
 
         footer {
@@ -309,11 +339,11 @@
             .header { flex-direction: column-reverse; align-items: center; text-align: center; }
             .uni-logo { width: 55px; }
             .team-grid { grid-template-columns: 1fr 1fr; }
-            .member-card { height: 160px; }
+            .member-card { height: 180px; }
         }
         @media (max-width: 480px) {
             .team-grid { grid-template-columns: 1fr; }
-            .member-card { height: 160px; }
+            .member-card { height: 180px; }
         }
     </style>
 </head>
@@ -323,7 +353,7 @@
     <div class="container">
         <header class="header">
             <div class="hero-text">
-                <h1>MarketLens AI</h1>
+                <h1 class="glow-text">MarketLens AI</h1>
                 <p class="subtitle">Smart Cross‑Border Product Intelligence</p>
             </div>
             <img src="https://static.igem.wiki/teams/5322/logo/njtech.png"
@@ -336,8 +366,8 @@
             <h2 class="section-title">What We Build</h2>
             <div class="overview-card">
                 <p>
-                    <strong>MarketLens AI</strong> is an <span class="highlight-word"><em>AI‑powered decision agent</em></span> designed for the realities of Silk Road e‑commerce.
-                    It solves the single biggest question facing cross‑border sellers today: <span class="highlight-word"><strong>what product will succeed in which market?</strong></span>
+                    <strong>MarketLens AI</strong> is an <em>AI‑powered decision agent</em> designed for the realities of Silk Road e‑commerce.
+                    It solves the single biggest question facing cross‑border sellers today: <strong>what product will succeed in which market?</strong>
                     By combining real‑time trend data, LLM‑driven review analysis, and a dynamic scoring engine, MarketLens turns uncertainty into a clear, ranked opportunity.
                     It’s not just a tool — it’s a co‑pilot for global trade, built to help Jiangsu exporters move faster, smarter, and with confidence.
                 </p>
@@ -349,12 +379,12 @@
             <div class="capabilities-container">
                 <p class="capabilities-text">
                     MarketLens AI 集成了
-                    <span class="highlight-word">实时趋势情报</span>，预测跨境平台的需求信号；
-                    <span class="highlight-word">AI 评论挖掘</span>，洞察市场缺口与竞争对手弱点；
-                    <span class="highlight-word">动态评分引擎</span>，平衡需求、利润、风险和竞争权重；
-                    <span class="highlight-word">风险矩阵</span>，模拟关税变化、物流中断与汇率波动；
-                    <span class="highlight-word">交互式仪表板</span>，提供 3D 可视化与实时报告；
-                    以及内建的 <span class="highlight-word">多语言 AI 助手</span>，帮助卖家与全球受众无缝沟通。
+                    <span class="highlight-word glow-text">实时趋势情报</span>，预测跨境平台的需求信号；
+                    <span class="highlight-word glow-text">AI 评论挖掘</span>，洞察市场缺口与竞争对手弱点；
+                    <span class="highlight-word glow-text">动态评分引擎</span>，平衡需求、利润、风险和竞争权重；
+                    <span class="highlight-word glow-text">风险矩阵</span>，模拟关税变化、物流中断与汇率波动；
+                    <span class="highlight-word glow-text">交互式仪表板</span>，提供 3D 可视化与实时报告；
+                    以及内建的 <span class="highlight-word glow-text">多语言 AI 助手</span>，帮助卖家与全球受众无缝沟通。
                     这些能力共同构成现代丝路电商的完整情报中枢。
                 </p>
             </div>
@@ -367,7 +397,8 @@
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <span class="highlight-word"><div class="name">Abdullah Bin Fahad</div></span>
+                            <div class="name glow-text">Abdullah Bin Fahad</div>
+                            <div class="chinese-name">(明远)</div>
                             <div class="major">Automation Engineering</div>
                             <div class="role">Team Lead</div>
                         </div>
@@ -380,9 +411,10 @@
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <span class="highlight-word"><div class="name">Rokeya Zaman</div></span>
+                            <div class="name glow-text">Rokeya Zaman</div>
+                            <div class="chinese-name">(洛娅)</div>
                             <div class="major">Automation Engineering</div>
-                            <div class="role">AI & Data Scientist</div>
+                            <div class="role">Data Scientist</div>
                         </div>
                         <div class="card-back">
                             <div class="bio">A dedicated and analytical mind from Nanjing Tech University, Rokeya transforms raw data into powerful insights with her business mind.</div>
@@ -393,7 +425,8 @@
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <span class="highlight-word"><div class="name">Shayne Lorraine</div></span>
+                            <div class="name glow-text">Shayne Lorraine</div>
+                            <div class="chinese-name">(罗嘉敏)</div>
                             <div class="major">Computer Science</div>
                             <div class="role">Full‑Stack Dev</div>
                         </div>
@@ -406,7 +439,8 @@
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <span class="highlight-word"><div class="name">Revy Syawal Rizki</div></span>
+                            <div class="name glow-text">Revy Syawal Rizki</div>
+                            <div class="chinese-name">(莱薇)</div>
                             <div class="major">Computer Science</div>
                             <div class="role">Backend Engineer</div>
                         </div>
@@ -419,9 +453,10 @@
                 <div class="member-card" onclick="void(0)">
                     <div class="card-inner">
                         <div class="card-front">
-                            <span class="highlight-word"><div class="name">Brian Mavenrich</div></span>
+                            <div class="name glow-text">Brian Mavenrich</div>
+                            <div class="chinese-name">(吴魏亮)</div>
                             <div class="major">Computer Science</div>
-                            <div class="role">Frontend & Data analytics </div>
+                            <div class="role">Frontend & AI</div>
                         </div>
                         <div class="card-back">
                             <div class="bio">A reliable and methodical thinker from Nanjing Tech University, Brian ensures every system runs smoothly and securely. Expert in Frontend and data entry.</div>
@@ -435,12 +470,12 @@
             <h2 class="section-title">Faculty Advisors</h2>
             <div class="advisor-row">
                 <div class="advisor-card">
-                    <span class="highlight-word"><div class="name">刘琬 · Liu Wan</div></span>
+                    <div class="name glow-text">刘琬 · Liu Wan</div>
                     <div class="dept">Overseas Education College, Nanjing Tech University</div>
                     <div class="contact">📧 liuliu@njtech.edu.cn</div>
                 </div>
                 <div class="advisor-card">
-                    <span class="highlight-word"><div class="name">张军强 · Zhang Junqiang</div></span>
+                    <div class="name glow-text">张军强 · Zhang Junqiang</div>
                     <div class="dept">School of Computer Science, Nanjing Tech University</div>
                     <div class="contact">📧 zjunqiang@126.com</div>
                 </div>
@@ -458,7 +493,7 @@
     </footer>
 
     <script>
-        // Animated background
+        // Animated background particles
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
         let w, h, particles;
@@ -497,7 +532,7 @@
         }
         drawParticles();
 
-        // Team card click toggle
+        // Team card click toggle for mobile
         const teamGrid = document.getElementById('teamGrid');
         if (teamGrid) {
             teamGrid.addEventListener('click', function(e) {
@@ -507,7 +542,7 @@
             });
         }
 
-        // Countdown
+        // Countdown timer
         const target = new Date('2026-10-20T00:00:00+08:00').getTime();
         const timer = document.getElementById('timerDigits');
         function updateTimer() {
