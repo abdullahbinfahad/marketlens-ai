@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MarketLens AI – OPC智能跨境商品情报助手。AI驱动的选品、实时市场情报和风险评估，服务丝路电商。">
-    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学">
+    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 南京工业大学">
     <meta property="og:title" content="MarketLens AI · 智能跨境商品情报助手">
     <meta property="og:description" content="AI赋能丝路电商，提供选品决策、市场洞察与风险分析。">
     <meta property="og:type" content="website">
@@ -63,7 +63,7 @@
             flex-wrap:wrap; gap:1.5rem; margin-bottom:1rem;
         }
         .hero-text h1 {
-            font-size: clamp(2.6rem, 5.5vw, 3.8rem); font-weight:900; letter-spacing:-1.5px;
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem); font-weight:900; letter-spacing:-1.5px;
             background: linear-gradient(135deg, var(--gold-light) 0%, #ffe8a0 30%, var(--pink) 70%, #ffb3d9 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
             animation: titleShimmer 3s ease-in-out infinite;
@@ -107,7 +107,7 @@
         @keyframes dotPulse { 0%,100%{ box-shadow:0 0 14px var(--gold), 0 0 28px rgba(245,166,35,0.5); } 50%{ box-shadow:0 0 24px var(--gold-light), 0 0 44px rgba(245,166,35,0.8); } }
         .section-title::after {
             content:''; flex:1; height:1px;
-            background:linear-gradient(90deg, var(--border-glow, rgba(245,166,35,0.25)), transparent 70%);
+            background:linear-gradient(90deg, rgba(245,166,35,0.25), transparent 70%);
             margin-left:0.5rem;
         }
 
@@ -121,27 +121,41 @@
         .no-tilt { transform: none !important; }
         .glass-card.no-tilt:hover { transform: none !important; }
 
-        .stock-graph-area {
-            display: flex; align-items: flex-end; gap: 4px; height: 60px;
-            margin: 1.5rem 0 0.5rem; padding: 0 5px;
+        /* About Us background charts */
+        .about-bg-charts {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
-        .stock-graph-area .candle {
-            width: 12px; border-radius: 2px; position: relative;
-            animation: candleUpDown 1.8s ease-in-out infinite alternate;
+        .bg-chart {
+            position: absolute;
+            opacity: 0.12;
+            animation: chartFloat 12s ease-in-out infinite alternate;
         }
-        .stock-graph-area .candle:nth-child(odd) { background: var(--teal); }
-        .stock-graph-area .candle:nth-child(even) { background: var(--gold); }
-        .stock-graph-area .candle:nth-child(1) { height:40%; animation-delay:0s; }
-        .stock-graph-area .candle:nth-child(2) { height:70%; animation-delay:0.1s; }
-        .stock-graph-area .candle:nth-child(3) { height:30%; animation-delay:0.2s; }
-        .stock-graph-area .candle:nth-child(4) { height:85%; animation-delay:0.3s; }
-        .stock-graph-area .candle:nth-child(5) { height:55%; animation-delay:0.4s; }
-        .stock-graph-area .candle:nth-child(6) { height:90%; animation-delay:0.5s; }
-        .stock-graph-area .candle:nth-child(7) { height:45%; animation-delay:0.6s; }
-        .stock-graph-area .candle:nth-child(8) { height:75%; animation-delay:0.7s; }
-        @keyframes candleUpDown {
-            0% { transform: scaleY(0.8); }
-            100% { transform: scaleY(1.15); }
+        .bg-chart.chart1 {
+            top: 10%;
+            right: 5%;
+            width: 40%;
+            max-width: 350px;
+            height: auto;
+        }
+        .bg-chart.chart2 {
+            bottom: 10%;
+            left: 5%;
+            width: 35%;
+            max-width: 300px;
+            height: auto;
+            animation-delay: -6s;
+        }
+        @keyframes chartFloat {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-8px) scale(1.02); }
+        }
+        .about-text {
+            position: relative;
+            z-index: 1;
         }
 
         .mission-vision-grid {
@@ -186,7 +200,6 @@
             margin-top:1.2rem; display:flex; align-items:center; gap:0.8rem;
             position:relative; z-index:2;
         }
-        /* unique chart styles */
         .ring-spin {
             width:45px; height:45px; border-radius:50%;
             background:conic-gradient(var(--gold) 0deg 120deg, var(--teal) 120deg 240deg, var(--purple) 240deg 360deg);
@@ -225,7 +238,7 @@
             display:flex; align-items:flex-end; gap:10px; height:40px;
         }
         .bar-compare .col {
-            width:16px; border-radius:4px 4px 0 0; transition: all 0.5s;
+            width:16px; border-radius:4px 4px 0 0;
         }
         .bar-compare .col.high { background:var(--gold); height:90%; animation:highGrow 1.8s ease-in-out infinite alternate; }
         .bar-compare .col.low { background:var(--teal); height:50%; animation:lowGrow 1.8s ease-in-out infinite alternate; }
@@ -274,10 +287,11 @@
         .typing-dots span:nth-child(3){ animation-delay:0.4s; }
         @keyframes typingBounce { 0%{ transform:translateY(0); } 100%{ transform:translateY(-6px); } }
 
+        /* Team cards */
         .team-row-wrapper { overflow-x:auto; padding-bottom:0.8rem; margin-bottom:2rem; }
         .team-row { display:flex; gap:1.2rem; min-width:min-content; padding:0.3rem; }
         .team-card {
-            flex:0 0 210px; perspective:1000px; cursor:pointer; height:270px;
+            flex:0 0 210px; perspective:1000px; cursor:pointer; height:300px;
             transition: transform var(--transition);
         }
         .team-card:hover { transform: translateY(-8px) scale(1.02); }
@@ -302,6 +316,91 @@
             font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:0.8rem;
             border:2px solid rgba(255,255,255,0.2);
             box-shadow:0 0 20px rgba(245,166,35,0.25);
+        }
+
+        /* Distinct role visuals */
+        .role-visual {
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 30px;
+        }
+        /* Captain: concentric pulse */
+        .pulse-ring {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulseRing 1.5s ease-out infinite;
+        }
+        @keyframes pulseRing {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(1.8); opacity: 0; }
+        }
+        /* Data Scientist: color-shifting bars */
+        .color-bars {
+            display: flex; gap: 2px; align-items: flex-end;
+        }
+        .color-bars span {
+            width: 6px;
+            border-radius: 2px;
+            animation: colorBarAnim 1.2s ease-in-out infinite alternate;
+        }
+        .color-bars span:nth-child(1) { height: 14px; background: var(--teal); }
+        .color-bars span:nth-child(2) { height: 20px; background: var(--gold); animation-delay: 0.15s; }
+        .color-bars span:nth-child(3) { height: 10px; background: var(--purple); animation-delay: 0.3s; }
+        @keyframes colorBarAnim {
+            0% { transform: scaleY(0.7); }
+            100% { transform: scaleY(1.3); }
+        }
+        /* Full-Stack: spinning gear + spark */
+        .gear-spark {
+            width: 20px; height: 20px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: gearSpin 2s linear infinite;
+            position: relative;
+        }
+        .gear-spark::after {
+            content: '';
+            position: absolute;
+            top: 2px; left: 6px;
+            width: 4px; height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkFlash 0.8s infinite alternate;
+        }
+        @keyframes gearSpin { to { transform: rotate(360deg); } }
+        @keyframes sparkFlash {
+            0% { opacity: 0.3; box-shadow: 0 0 4px white; }
+            100% { opacity: 1; box-shadow: 0 0 12px var(--gold); }
+        }
+        /* Backend: database pulsing */
+        .db-pulse {
+            width: 22px; height: 18px;
+            border: 2px solid var(--teal);
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            animation: dbGlow 1.2s infinite;
+        }
+        .db-pulse::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 2px;
+            width: 16px; height: 4px;
+            background: var(--teal);
+            border-radius: 0 0 2px 2px;
+        }
+        @keyframes dbGlow {
+            0%,100% { box-shadow: 0 0 6px var(--teal); }
+            50% { box-shadow: 0 0 18px var(--teal); }
+        }
+        /* Frontend/Data: animated line drawing */
+        .line-draw {
+            width: 28px; height: 20px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><path d="M0,15 L5,8 L10,12 L15,3 L20,10 L25,5 L30,12" stroke="%23f5a623" fill="none" stroke-width="1.5" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="2s" repeatCount="indefinite"/></path></svg>') no-repeat center;
+            background-size: contain;
         }
 
         .advisor-row { display:flex; flex-wrap:wrap; gap:1.5rem; margin-bottom:2.5rem; }
@@ -333,15 +432,32 @@
         @keyframes fadeText { 0%,100%{ opacity:0.6; } 50%{ opacity:1; } }
         footer { text-align:center; padding:1.2rem 0 4.5rem; color:#555; font-size:0.82rem; border-top:1px solid var(--border); margin-top:1.5rem; }
 
+        /* Mobile improvements */
         @media (max-width:768px) {
             .container { padding:1rem; }
+            .header {
+                flex-direction: column-reverse;
+                align-items: flex-end;
+            }
+            .hero-text {
+                align-self: flex-start;
+                text-align: left;
+                width: 100%;
+            }
+            .uni-logo { width: 55px; }
+            .hero-text h1 { font-size: 2rem; }
             .mission-vision-grid { grid-template-columns:1fr; }
             .features-grid { grid-template-columns:1fr 1fr; }
-            .team-card { flex:0 0 170px; height:240px; }
+            .team-card { flex:0 0 160px; height:270px; }
+            .avatar-circle { width:50px; height:50px; font-size:1.2rem; }
+            .bg-chart.chart1 { width: 50%; top: 5%; right: 2%; }
+            .bg-chart.chart2 { width: 45%; bottom: 5%; left: 2%; }
         }
         @media (max-width:480px) {
             .features-grid { grid-template-columns:1fr; }
-            .team-card { flex:0 0 155px; height:225px; }
+            .team-card { flex:0 0 140px; height:250px; }
+            .bg-chart.chart1 { width: 70%; }
+            .bg-chart.chart2 { width: 65%; }
         }
     </style>
 </head>
@@ -366,25 +482,37 @@
             <span style="color:var(--muted); font-size:0.8rem;">Analyzing 50k+ products across multiple markets</span>
         </div>
 
-        <!-- About Us - no hover tilt, stock graph inside -->
+        <!-- About Us with background charts -->
         <section>
-            <h2 class="section-title"><span class="accent-dot"></span>About Us</h2>
-            <div class="glass-card no-tilt" style="display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap;">
-    <div style="flex: 1; min-width: 280px;">
-        <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem;">
-            MarketLens AI is an AI analytics platform built from the ground up to eliminate the guesswork in cross‑border e‑commerce. We understand the frustration of messy, scattered product data, the hours wasted manually reading through thousands of customer reviews, and the lack of a standardized way to score product potential — not to mention the eye‑watering costs of traditional industry tools. That's why we created a solution that finally puts powerful, accessible market intelligence directly into the hands of sellers.
-        </p>
-        <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem; margin-top:1rem;">
-            Powered by cutting‑edge LLMs including DeepSeek and a proprietary multi‑factor evaluation engine, MarketLens transforms raw signals into crystal‑clear decisions. Whether it's identifying emerging product trends, uncovering hidden consumer pain points through sentiment analysis, or predicting inventory risks before they happen, our platform acts as a 24/7 strategic co‑pilot that continuously learns and improves. We don't just show you data — we show you what to do with it.
-        </p>
-    </div>
-    <!-- real stock market graph animation – now on the right -->
-    <div class="stock-graph-area" style="flex-shrink: 0;">
-        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
-        <div class="candle"></div><div class="candle"></div><div class="candle"></div>
-        <div class="candle"></div><div class="candle"></div>
-    </div>
-</div>
+            <h2 class="section-title"><span class="accent-dot"></span>About MarketLens</h2>
+            <div class="glass-card no-tilt">
+                <div class="about-bg-charts">
+                    <div class="bg-chart chart1">
+                        <svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:auto;">
+                            <polyline points="0,120 40,90 80,130 120,50 160,100 200,30 240,70 280,20 300,60"
+                                      fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="120" cy="50" r="4" fill="#00d4aa"/>
+                            <circle cx="200" cy="30" r="4" fill="#00d4aa"/>
+                        </svg>
+                    </div>
+                    <div class="bg-chart chart2">
+                        <svg viewBox="0 0 250 120" preserveAspectRatio="none" style="width:100%;height:auto;">
+                            <polyline points="0,100 30,70 60,110 90,30 120,80 150,20 180,60 210,40 250,50"
+                                      fill="none" stroke="#f15bb5" stroke-width="2" stroke-linecap="round"/>
+                            <circle cx="90" cy="30" r="4" fill="#f15bb5"/>
+                            <circle cx="150" cy="20" r="4" fill="#f15bb5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem;">
+                        MarketLens AI is an AI analytics platform built from the ground up to eliminate the guesswork in cross‑border e‑commerce. We understand the frustration of messy, scattered product data, the hours wasted manually reading through thousands of customer reviews, and the lack of a standardized way to score product potential — not to mention the eye‑watering costs of traditional industry tools. That’s why we created a solution that finally puts powerful, accessible market intelligence directly into the hands of sellers.
+                    </p>
+                    <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem; margin-top:1rem;">
+                        Powered by cutting‑edge LLMs including DeepSeek and a proprietary multi‑factor evaluation engine, MarketLens transforms raw signals into crystal‑clear decisions. Whether it’s identifying emerging product trends, uncovering hidden consumer pain points through sentiment analysis, or predicting inventory risks before they happen, our platform acts as a 24/7 strategic co‑pilot that continuously learns and improves. We don’t just show you data — we show you what to do with it.
+                    </p>
+                </div>
+            </div>
         </section>
 
         <section>
@@ -406,54 +534,14 @@
         <section>
             <h2 class="section-title"><span class="accent-dot"></span>What Makes Us Different</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
-                    <h4>Custom Multi-Factor Scoring</h4>
-                    <p>GO / CAUTION / PASS signals combining demand, competition & profitability.</p>
-                    <div class="mini-chart"><div class="ring-spin"></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
-                    <h4>LLM Sentiment Analysis</h4>
-                    <p>Auto-dig complaints & market gaps with DeepSeek-powered pipelines.</p>
-                    <div class="mini-chart"><div class="equalizer"><span></span><span></span><span></span><span></span><span></span></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">⚡</span>
-                    <h4>Automated Data Pipeline</h4>
-                    <p>Real-time React dashboard, no manual wrangling.</p>
-                    <div class="mini-chart"><div class="flow-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💡</span>
-                    <h4>Lightweight & Affordable</h4>
-                    <p>Enterprise-grade intelligence at a fraction of competitor costs.</p>
-                    <div class="mini-chart"><div class="bar-compare"><div class="col high"></div><div class="col low"></div></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌍</span>
-                    <h4>Cross-Market Adaptability</h4>
-                    <p>Works across global marketplaces with a consistent framework.</p>
-                    <div class="mini-chart"><div class="globe-ring"></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🔄</span>
-                    <h4>Continuous Learning</h4>
-                    <p>AI refines scoring models based on real outcomes.</p>
-                    <div class="mini-chart"><div class="sparkline"></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📈</span>
-                    <h4>Real-Time Analytics Engine</h4>
-                    <p>Live dashboards, trend forecasting & risk matrices.</p>
-                    <div class="mini-chart"><div class="candlestick-mini"><span></span><span></span><span></span><span></span><span></span></div></div>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌐</span>
-                    <h4>Multi-Language AI Assistant</h4>
-                    <p>Built-in assistant for seamless global communication.</p>
-                    <div class="mini-chart"><div class="typing-dots"><span></span><span></span><span></span></div></div>
-                </div>
+                <div class="feature-card"><span class="feature-icon">📊</span><h4>Custom Multi-Factor Scoring</h4><p>GO / CAUTION / PASS signals combining demand, competition & profitability.</p><div class="mini-chart"><div class="ring-spin"></div></div></div>
+                <div class="feature-card"><span class="feature-icon">🧠</span><h4>LLM Sentiment Analysis</h4><p>Auto-dig complaints & market gaps with DeepSeek-powered pipelines.</p><div class="mini-chart"><div class="equalizer"><span></span><span></span><span></span><span></span><span></span></div></div></div>
+                <div class="feature-card"><span class="feature-icon">⚡</span><h4>Automated Data Pipeline</h4><p>Real-time React dashboard, no manual wrangling.</p><div class="mini-chart"><div class="flow-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div></div>
+                <div class="feature-card"><span class="feature-icon">💡</span><h4>Lightweight & Affordable</h4><p>Enterprise-grade intelligence at a fraction of competitor costs.</p><div class="mini-chart"><div class="bar-compare"><div class="col high"></div><div class="col low"></div></div></div></div>
+                <div class="feature-card"><span class="feature-icon">🌍</span><h4>Cross-Market Adaptability</h4><p>Works across global marketplaces with a consistent framework.</p><div class="mini-chart"><div class="globe-ring"></div></div></div>
+                <div class="feature-card"><span class="feature-icon">🔄</span><h4>Continuous Learning</h4><p>AI refines scoring models based on real outcomes.</p><div class="mini-chart"><div class="sparkline"></div></div></div>
+                <div class="feature-card"><span class="feature-icon">📈</span><h4>Real-Time Analytics Engine</h4><p>Live dashboards, trend forecasting & risk matrices.</p><div class="mini-chart"><div class="candlestick-mini"><span></span><span></span><span></span><span></span><span></span></div></div></div>
+                <div class="feature-card"><span class="feature-icon">🌐</span><h4>Multi-Language AI Assistant</h4><p>Built-in assistant for seamless global communication.</p><div class="mini-chart"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>
             </div>
         </section>
 
@@ -469,34 +557,61 @@
                                 <div class="chinese-name">(明远)</div>
                                 <div class="major">Automation Engineering</div>
                                 <div class="role captain">★ Team Captain</div>
+                                <div class="role-visual"><div class="pulse-ring"></div></div>
                             </div>
-                            <div class="team-card-back">
-                                <div class="bio">Clarity, determination, AI strategy. Leads the OPC intelligent agent concept.</div>
+                            <div class="team-card-back"><div class="bio">Clarity, determination, AI strategy. Leads the OPC intelligent agent concept.</div></div>
+                        </div>
+                    </div>
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front">
+                                <div class="avatar-circle">R</div>
+                                <div class="name">Rokeya Zaman</div>
+                                <div class="chinese-name">(洛娅)</div>
+                                <div class="major">Automation Engineering</div>
+                                <div class="role">Data Scientist & AI</div>
+                                <div class="role-visual"><div class="color-bars"><span></span><span></span><span></span></div></div>
                             </div>
+                            <div class="team-card-back"><div class="bio">Dedicated analytical mind, transforms raw data into powerful insights.</div></div>
                         </div>
                     </div>
                     <div class="team-card" data-flip>
                         <div class="team-card-inner">
-                            <div class="team-card-front"><div class="avatar-circle">R</div><div class="name">Rokeya Zaman</div><div class="chinese-name">(洛娅)</div><div class="major">Automation Engineering</div><div class="role">Data Scientist & AI</div></div>
-                            <div class="team-card-back"><div class="bio">Dedicated analytical mind, transforms raw data into business insights.</div></div>
+                            <div class="team-card-front">
+                                <div class="avatar-circle">S</div>
+                                <div class="name">Shayne Lorraine</div>
+                                <div class="chinese-name">(罗嘉敏)</div>
+                                <div class="major">Computer Science</div>
+                                <div class="role">Full‑Stack Dev</div>
+                                <div class="role-visual"><div class="gear-spark"></div></div>
+                            </div>
+                            <div class="team-card-back"><div class="bio">Creative problem‑solver building elegant, robust digital solutions.</div></div>
                         </div>
                     </div>
                     <div class="team-card" data-flip>
                         <div class="team-card-inner">
-                            <div class="team-card-front"><div class="avatar-circle">S</div><div class="name">Shayne Lorraine</div><div class="chinese-name">(罗嘉敏)</div><div class="major">Computer Science</div><div class="role">Full‑Stack Dev</div></div>
-                            <div class="team-card-back"><div class="bio">Creative problem‑solver building elegant digital solutions.</div></div>
+                            <div class="team-card-front">
+                                <div class="avatar-circle">R</div>
+                                <div class="name">Revy Syawal Rizki</div>
+                                <div class="chinese-name">(莱薇)</div>
+                                <div class="major">Computer Science</div>
+                                <div class="role">Backend Engineer</div>
+                                <div class="role-visual"><div class="db-pulse"></div></div>
+                            </div>
+                            <div class="team-card-back"><div class="bio">Enthusiastic learner, expert in analytics, research, and user experience.</div></div>
                         </div>
                     </div>
                     <div class="team-card" data-flip>
                         <div class="team-card-inner">
-                            <div class="team-card-front"><div class="avatar-circle">R</div><div class="name">Revy Syawal Rizki</div><div class="chinese-name">(莱薇)</div><div class="major">Computer Science</div><div class="role">Backend Engineer</div></div>
-                            <div class="team-card-back"><div class="bio">Enthusiastic learner, expert in analytics and research.</div></div>
-                        </div>
-                    </div>
-                    <div class="team-card" data-flip>
-                        <div class="team-card-inner">
-                            <div class="team-card-front"><div class="avatar-circle">B</div><div class="name">Brian Mavenrich</div><div class="chinese-name">(吴魏亮)</div><div class="major">Computer Science</div><div class="role">Frontend & Data</div></div>
-                            <div class="team-card-back"><div class="bio">Reliable methodical thinker, ensures smooth secure systems.</div></div>
+                            <div class="team-card-front">
+                                <div class="avatar-circle">B</div>
+                                <div class="name">Brian Mavenrich</div>
+                                <div class="chinese-name">(吴魏亮)</div>
+                                <div class="major">Computer Science</div>
+                                <div class="role">Frontend & Data</div>
+                                <div class="role-visual"><div class="line-draw"></div></div>
+                            </div>
+                            <div class="team-card-back"><div class="bio">Reliable methodical thinker, ensures smooth, secure systems.</div></div>
                         </div>
                     </div>
                 </div>
@@ -506,16 +621,8 @@
         <section>
             <h2 class="section-title"><span class="accent-dot"></span>Faculty Advisors</h2>
             <div class="advisor-row">
-                <div class="advisor-card">
-                    <div class="name">刘琉 · Liu Liu</div>
-                    <div class="dept">Overseas Education College, Nanjing Tech University</div>
-                    <div class="contact">📧 liuliu@njtech.edu.cn</div>
-                </div>
-                <div class="advisor-card">
-                    <div class="name">张军强 · Zhang Junqiang</div>
-                    <div class="dept">School of Computer Science, Nanjing Tech University</div>
-                    <div class="contact">📧 zjunqiang@126.com</div>
-                </div>
+                <div class="advisor-card"><div class="name">刘琉 · Liu Liu</div><div class="dept">Overseas Education College, Nanjing Tech University</div><div class="contact">📧 liuliu@njtech.edu.cn</div></div>
+                <div class="advisor-card"><div class="name">张军强 · Zhang Junqiang</div><div class="dept">School of Computer Science, Nanjing Tech University</div><div class="contact">📧 zjunqiang@126.com</div></div>
             </div>
         </section>
     </div>
