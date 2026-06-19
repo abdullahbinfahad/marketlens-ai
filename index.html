@@ -4,519 +4,513 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="MarketLens AI – OPC智能跨境商品情报助手。AI驱动的选品、实时市场情报和风险评估，服务丝路电商。">
-    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学, Abdullah Bin Fahad, 明远">
+    <meta name="keywords" content="MarketLens AI, OPC, 跨境电子商务, AI智能体, 丝路电商, 选品, 市场情报, 南京工业大学">
     <meta property="og:title" content="MarketLens AI · 智能跨境商品情报助手">
     <meta property="og:description" content="AI赋能丝路电商，提供选品决策、市场洞察与风险分析。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marketlens.ai">
-    <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://marketlens.ai">
     <title>MarketLens AI – 智能跨境商品情报助手</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #090a16;
-            --surface: #141629;
-            --card-bg: rgba(20, 22, 41, 0.85);
+            --card-bg: rgba(20, 22, 41, 0.7);
             --gold: #f5a623;
             --gold-light: #ffc940;
             --teal: #00d4aa;
+            --teal-glow: #00ffc8;
             --purple: #9b5de5;
             --pink: #f15bb5;
             --text: #e8e8e8;
             --muted: #a0a3b1;
             --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(20, 22, 41, 0.55);
+            --radius-lg: 22px;
+            --radius-xl: 28px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         * { margin:0; padding:0; box-sizing:border-box; }
-
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background: var(--bg);
             color: var(--text);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            position: relative;
         }
-
-        @keyframes pulse-glow {
-            0% { text-shadow: 0 0 8px rgba(245,166,35,0.5), 0 0 16px rgba(245,166,35,0.2); }
-            100% { text-shadow: 0 0 18px rgba(245,166,35,0.8), 0 0 30px rgba(245,166,35,0.4); }
-        }
-        .glow-text {
-            animation: pulse-glow 2s infinite alternate;
-        }
-
         #bgCanvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -2;
-            opacity: 0.35;
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            z-index:-2; opacity:0.35; pointer-events:none;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.5rem 2rem;
-            position: relative;
-            z-index: 1;
+        .ambient-orb {
+            position: fixed; border-radius:50%; filter:blur(140px);
+            opacity:0.12; pointer-events:none; z-index:-1;
+            animation: orbDrift 18s ease-in-out infinite;
         }
+        .orb-1 { width:500px; height:500px; background:var(--gold); top:-10%; left:-8%; }
+        .orb-2 { width:420px; height:420px; background:var(--teal); bottom:-12%; right:-6%; animation-delay:-7s; animation-duration:20s; }
+        .orb-3 { width:350px; height:350px; background:var(--purple); top:50%; left:55%; animation-delay:-12s; animation-duration:22s; }
+        @keyframes orbDrift {
+            0%,100%{ transform:translate(0,0) scale(1); }
+            25%{ transform:translate(40px,-30px) scale(1.15); }
+            50%{ transform:translate(-20px,25px) scale(0.9); }
+            75%{ transform:translate(-35px,-15px) scale(1.1); }
+        }
+        .container { max-width:1300px; margin:0 auto; padding:1.5rem 2rem; position:relative; z-index:1; }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            display:flex; justify-content:space-between; align-items:flex-start;
+            flex-wrap:wrap; gap:1.5rem; margin-bottom:1rem;
         }
         .hero-text h1 {
-            font-size: clamp(2.4rem, 5vw, 3.4rem);
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--pink) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.1;
-            margin-bottom: 0.3rem;
-            animation: pulse-glow 2s infinite alternate;
+            font-size: clamp(2.6rem, 5.5vw, 3.8rem); font-weight:900; letter-spacing:-1.5px;
+            background: linear-gradient(135deg, var(--gold-light) 0%, #ffe8a0 30%, var(--pink) 70%, #ffb3d9 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            animation: titleShimmer 3s ease-in-out infinite;
         }
-        .hero-text .subtitle {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--muted);
-            font-weight: 500;
+        @keyframes titleShimmer {
+            0%,100%{ filter: brightness(1) drop-shadow(0 0 18px rgba(245,166,35,0.5)); }
+            50%{ filter: brightness(1.25) drop-shadow(0 0 32px rgba(255,201,64,0.8)); }
         }
-        .uni-logo {
-            width: 70px;
-            height: auto;
-            border: none;
-            background: none;
-            padding: 0;
-            border-radius: 0;
-            transition: transform 0.3s ease;
+        .hero-text .subtitle { font-size:1rem; text-transform:uppercase; letter-spacing:3.5px; color:var(--muted); font-weight:500; }
+        .uni-logo { width:72px; transition: transform var(--transition); filter:drop-shadow(0 0 10px rgba(255,255,255,0.15)); }
+        .uni-logo:hover { transform:scale(1.08); filter:drop-shadow(0 0 20px rgba(245,166,35,0.5)); }
+
+        .market-pulse {
+            background: rgba(20,22,41,0.65); backdrop-filter: blur(14px); border:1px solid var(--border);
+            border-radius:20px; padding:0.9rem 1.8rem; margin-bottom:2.5rem;
+            display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;
         }
-        .uni-logo:hover {
-            transform: scale(1.05);
+        .pulse-indicator { display:flex; align-items:center; gap:0.6rem; color:var(--teal); font-weight:600; font-size:0.9rem; }
+        .pulse-dot { width:10px; height:10px; border-radius:50%; background:var(--teal); box-shadow:0 0 15px var(--teal); animation: pulseDot 1.8s infinite; }
+        @keyframes pulseDot { 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.8); opacity:0.6; } }
+        .scan-line {
+            flex:1; height:2px; background:linear-gradient(90deg, transparent, rgba(0,212,170,0.5), rgba(245,166,35,0.5), transparent);
+            position:relative; border-radius:2px; overflow:hidden; min-width:120px;
         }
+        .scan-line::after {
+            content:''; position:absolute; top:0; left:-30%; width:30%; height:100%;
+            background:linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+            animation:scanMove 3s linear infinite;
+        }
+        @keyframes scanMove { 0%{ left:-30%; } 100%{ left:130%; } }
 
         .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            color: var(--gold);
-            display: flex;
-            align-items: center;
+            font-size:1.7rem; font-weight:700; margin-bottom:1.4rem; color:var(--text);
+            display:flex; align-items:center; gap:1rem;
         }
+        .section-title .accent-dot {
+            width:10px; height:10px; border-radius:50%; background:var(--gold);
+            box-shadow:0 0 14px var(--gold), 0 0 28px rgba(245,166,35,0.5);
+            animation:dotPulse 2s infinite;
+        }
+        @keyframes dotPulse { 0%,100%{ box-shadow:0 0 14px var(--gold), 0 0 28px rgba(245,166,35,0.5); } 50%{ box-shadow:0 0 24px var(--gold-light), 0 0 44px rgba(245,166,35,0.8); } }
         .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--border), transparent);
-            margin-left: 1rem;
+            content:''; flex:1; height:1px;
+            background:linear-gradient(90deg, var(--border-glow, rgba(245,166,35,0.25)), transparent 70%);
+            margin-left:0.5rem;
         }
 
-        .overview-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-            font-size: 1.05rem;
-            color: #c8ccd4;
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border:1px solid var(--border); border-radius:var(--radius-xl);
+            padding:2rem 2.2rem; margin-bottom:2.5rem;
+            transition: all var(--transition); position:relative; overflow:hidden;
+            box-shadow:0 8px 40px rgba(0,0,0,0.35);
         }
-        .overview-card strong { color: var(--gold-light); }
-        .overview-card em { color: var(--teal); font-style: normal; font-weight: 600; }
+        .no-tilt { transform: none !important; }
+        .glass-card.no-tilt:hover { transform: none !important; }
 
-        .capabilities-container {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            transition: background 0.3s;
+        .stock-graph-area {
+            display: flex; align-items: flex-end; gap: 4px; height: 60px;
+            margin: 1.5rem 0 0.5rem; padding: 0 5px;
         }
-        .capabilities-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #c8ccd4;
-            transition: color 0.3s;
+        .stock-graph-area .candle {
+            width: 12px; border-radius: 2px; position: relative;
+            animation: candleUpDown 1.8s ease-in-out infinite alternate;
         }
-        .capabilities-container:hover .capabilities-text {
-            color: #fff;
-        }
-        .highlight-word {
-            font-weight: 600;
-            color: var(--gold-light);
-            transition: all 0.3s, text-shadow 0.3s;
-            display: inline-block;
-            cursor: default;
-            text-shadow: 0 0 8px rgba(245,166,35,0.5);
-        }
-        .capabilities-container:hover .highlight-word {
-            color: #fff;
-            text-shadow: 0 0 16px var(--gold), 0 0 30px var(--gold-light);
+        .stock-graph-area .candle:nth-child(odd) { background: var(--teal); }
+        .stock-graph-area .candle:nth-child(even) { background: var(--gold); }
+        .stock-graph-area .candle:nth-child(1) { height:40%; animation-delay:0s; }
+        .stock-graph-area .candle:nth-child(2) { height:70%; animation-delay:0.1s; }
+        .stock-graph-area .candle:nth-child(3) { height:30%; animation-delay:0.2s; }
+        .stock-graph-area .candle:nth-child(4) { height:85%; animation-delay:0.3s; }
+        .stock-graph-area .candle:nth-child(5) { height:55%; animation-delay:0.4s; }
+        .stock-graph-area .candle:nth-child(6) { height:90%; animation-delay:0.5s; }
+        .stock-graph-area .candle:nth-child(7) { height:45%; animation-delay:0.6s; }
+        .stock-graph-area .candle:nth-child(8) { height:75%; animation-delay:0.7s; }
+        @keyframes candleUpDown {
+            0% { transform: scaleY(0.8); }
+            100% { transform: scaleY(1.15); }
         }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.2rem;
-            margin-bottom: 2.5rem;
+        .mission-vision-grid {
+            display:grid; grid-template-columns:1fr 1fr; gap:1.8rem; margin-bottom:2.5rem;
         }
-        .member-card {
-            perspective: 800px;
-            height: 200px;
-            cursor: pointer;
+        .mv-card {
+            background: var(--glass); backdrop-filter: blur(20px); border:1px solid var(--border);
+            border-radius:var(--radius-xl); padding:2rem; transition: all var(--transition);
+            transform-style: preserve-3d; cursor:pointer;
         }
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .mv-card:hover {
+            transform: perspective(800px) rotateX(3deg) rotateY(-2deg) translateY(-6px);
+            border-color: rgba(255,255,255,0.25); box-shadow:0 25px 60px rgba(0,0,0,0.5);
+        }
+        .mv-card .mv-icon { font-size:2.4rem; margin-bottom:0.8rem; display:inline-block; transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+        .mv-card:hover .mv-icon { transform: translateX(6px) scale(1.25) rotate(3deg); }
+        .mv-card h3 { font-size:1.3rem; color:#fff; margin-bottom:0.6rem; }
+        .mv-card p { color:#bcc0cc; line-height:1.7; font-size:0.95rem; }
+
+        .features-grid {
+            display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap:1.4rem; margin-bottom:2.5rem;
+        }
+        .feature-card {
+            background: var(--glass); backdrop-filter: blur(18px); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:1.6rem; transition: all var(--transition);
+            transform-style: preserve-3d; cursor:pointer;
+        }
+        .feature-card:hover {
+            transform: perspective(800px) rotateX(4deg) rotateY(-3deg) translateY(-5px) scale(1.02);
+            border-color: rgba(255,255,255,0.25); box-shadow:0 25px 50px rgba(0,0,0,0.5);
+        }
+        .feature-card .feature-icon {
+            font-size:2.2rem; margin-bottom:0.7rem; display:inline-block;
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .feature-card:hover .feature-icon { transform: translateX(8px) scale(1.3) rotate(8deg); }
+        .feature-card h4 { font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:0.4rem; }
+        .feature-card p { font-size:0.88rem; color:#a8acba; line-height:1.55; }
+
+        .mini-chart {
+            margin-top:1.2rem; display:flex; align-items:center; gap:0.8rem;
+            position:relative; z-index:2;
+        }
+        /* unique chart styles */
+        .ring-spin {
+            width:45px; height:45px; border-radius:50%;
+            background:conic-gradient(var(--gold) 0deg 120deg, var(--teal) 120deg 240deg, var(--purple) 240deg 360deg);
+            animation: ringSpin 4s linear infinite; box-shadow:0 0 18px rgba(245,166,35,0.4);
+        }
+        .ring-spin::after { content:''; position:absolute; inset:8px; border-radius:50%; background:var(--card-bg); }
+        @keyframes ringSpin { to{ transform:rotate(360deg); } }
+
+        .equalizer {
+            display:flex; align-items:flex-end; gap:3px; height:40px;
+        }
+        .equalizer span {
+            width:5px; border-radius:2px; background:var(--teal);
+            animation:eqBounce 0.9s ease-in-out infinite alternate;
+        }
+        .equalizer span:nth-child(1){ height:70%; animation-delay:0s; }
+        .equalizer span:nth-child(2){ height:90%; animation-delay:0.1s; }
+        .equalizer span:nth-child(3){ height:50%; animation-delay:0.2s; }
+        .equalizer span:nth-child(4){ height:80%; animation-delay:0.3s; }
+        .equalizer span:nth-child(5){ height:60%; animation-delay:0.4s; }
+        @keyframes eqBounce { 0%{ transform:scaleY(0.6); } 100%{ transform:scaleY(1); } }
+
+        .flow-dots {
+            display:flex; gap:6px; align-items:center;
+        }
+        .flow-dots .dot {
+            width:6px; height:6px; border-radius:50%; background:var(--gold);
+            animation:dotFlow 1.2s ease-in-out infinite alternate;
+        }
+        .flow-dots .dot:nth-child(2){ animation-delay:0.2s; }
+        .flow-dots .dot:nth-child(3){ animation-delay:0.4s; }
+        .flow-dots .dot:nth-child(4){ animation-delay:0.6s; }
+        @keyframes dotFlow { 0%{ transform:translateY(0); opacity:0.6; } 100%{ transform:translateY(-8px); opacity:1; } }
+
+        .bar-compare {
+            display:flex; align-items:flex-end; gap:10px; height:40px;
+        }
+        .bar-compare .col {
+            width:16px; border-radius:4px 4px 0 0; transition: all 0.5s;
+        }
+        .bar-compare .col.high { background:var(--gold); height:90%; animation:highGrow 1.8s ease-in-out infinite alternate; }
+        .bar-compare .col.low { background:var(--teal); height:50%; animation:lowGrow 1.8s ease-in-out infinite alternate; }
+        @keyframes highGrow { 0%{ height:85%; } 100%{ height:95%; } }
+        @keyframes lowGrow { 0%{ height:45%; } 100%{ height:55%; } }
+
+        .globe-ring {
+            width:40px; height:40px; border:3px solid var(--teal); border-radius:50%;
+            position:relative; animation:globeSpin 6s linear infinite;
+        }
+        .globe-ring::after {
+            content:''; position:absolute; top:6px; left:6px;
+            width:24px; height:24px; border-radius:50%;
+            background:radial-gradient(circle at 30% 30%, var(--gold), var(--purple));
+        }
+        @keyframes globeSpin { to{ transform:rotate(360deg); } }
+
+        .sparkline {
+            width:80px; height:30px; background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg"><polyline points="0,25 15,20 30,22 45,8 60,18 75,10 100,15" fill="none" stroke="%23f5a623" stroke-width="2"/></svg>') no-repeat center;
+            background-size:contain; animation:sparkMove 2s ease-in-out infinite alternate;
+        }
+        @keyframes sparkMove { 0%{ transform:translateX(-2px); } 100%{ transform:translateX(2px); } }
+
+        .candlestick-mini {
+            display:flex; align-items:flex-end; gap:2px; height:40px;
+        }
+        .candlestick-mini span {
+            width:5px; background:var(--gold); border-radius:1px;
+            animation:candleAnim 1.2s ease-in-out infinite alternate;
+        }
+        .candlestick-mini span:nth-child(1){ height:70%; animation-delay:0s; }
+        .candlestick-mini span:nth-child(2){ height:90%; animation-delay:0.1s; }
+        .candlestick-mini span:nth-child(3){ height:40%; animation-delay:0.2s; }
+        .candlestick-mini span:nth-child(4){ height:80%; animation-delay:0.3s; }
+        .candlestick-mini span:nth-child(5){ height:55%; animation-delay:0.4s; }
+        @keyframes candleAnim { 0%{ transform:scaleY(0.8); } 100%{ transform:scaleY(1.1); } }
+
+        .typing-dots {
+            display:flex; gap:4px; align-items:center;
+        }
+        .typing-dots span {
+            width:6px; height:6px; border-radius:50%; background:var(--teal);
+            animation:typingBounce 0.8s infinite alternate;
+        }
+        .typing-dots span:nth-child(2){ animation-delay:0.2s; }
+        .typing-dots span:nth-child(3){ animation-delay:0.4s; }
+        @keyframes typingBounce { 0%{ transform:translateY(0); } 100%{ transform:translateY(-6px); } }
+
+        .team-row-wrapper { overflow-x:auto; padding-bottom:0.8rem; margin-bottom:2rem; }
+        .team-row { display:flex; gap:1.2rem; min-width:min-content; padding:0.3rem; }
+        .team-card {
+            flex:0 0 210px; perspective:1000px; cursor:pointer; height:270px;
+            transition: transform var(--transition);
+        }
+        .team-card:hover { transform: translateY(-8px) scale(1.02); }
+        .team-card-inner {
+            position:relative; width:100%; height:100%;
+            transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
             transform-style: preserve-3d;
         }
-        .member-card:hover .card-inner {
-            transform: rotateY(180deg);
+        .team-card.flipped .team-card-inner { transform: rotateY(180deg); }
+        .team-card-front, .team-card-back {
+            position:absolute; width:100%; height:100%; backface-visibility:hidden;
+            border-radius:var(--radius-lg); display:flex; flex-direction:column;
+            align-items:center; justify-content:center; text-align:center;
+            background: rgba(18,20,38,0.85); backdrop-filter:blur(16px);
+            border:1px solid var(--border); padding:1.2rem; box-shadow:0 10px 35px rgba(0,0,0,0.3);
         }
-        .member-card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 16px;
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-        }
-        .card-back {
-            transform: rotateY(180deg);
-            background: rgba(20, 22, 41, 0.95);
-            border-color: rgba(245,166,35,0.25);
-            text-align: center;
-            overflow-y: auto;
-        }
-        .card-front .name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 0.2rem;
-            text-shadow: 0 0 10px rgba(255,200,0,0.7);
-        }
-        .card-front .chinese-name {
-            font-size: 0.9rem;
-            color: var(--gold-light);
-            margin-bottom: 0.3rem;
-            font-weight: 500;
-            text-shadow: 0 0 6px rgba(255,200,0,0.5);
-        }
-        .card-front .major {
-            font-size: 0.8rem;
-            color: var(--teal);
-            font-weight: 500;
-        }
-        .card-front .role {
-            font-size: 0.75rem;
-            color: var(--gold-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.4rem;
-        }
-        .card-back .bio {
-            font-size: 0.9rem;
-            color: #e0e0e0;
-            line-height: 1.5;
-            font-weight: 400;
-            padding: 0.2rem;
+        .team-card-back { transform:rotateY(180deg); background:rgba(16,18,34,0.92); }
+        .avatar-circle {
+            width:64px; height:64px; border-radius:50%;
+            background:linear-gradient(135deg, rgba(245,166,35,0.3), rgba(155,93,229,0.3));
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.5rem; font-weight:800; color:#fff; margin-bottom:0.8rem;
+            border:2px solid rgba(255,255,255,0.2);
+            box-shadow:0 0 20px rgba(245,166,35,0.25);
         }
 
-        .advisor-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
+        .advisor-row { display:flex; flex-wrap:wrap; gap:1.5rem; margin-bottom:2.5rem; }
         .advisor-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1.3rem 1.5rem;
-            flex: 1 1 250px;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
-            transform-style: preserve-3d;
-            perspective: 800px;
-            cursor: pointer;
+            background: var(--glass); backdrop-filter:blur(14px); border:1px solid var(--border);
+            border-radius:var(--radius-lg); padding:1.4rem 1.6rem; flex:1 1 260px;
+            transition: all var(--transition); cursor:pointer;
         }
-        .advisor-card:hover {
-            transform: rotateY(4deg) rotateX(-2deg) scale(1.02);
-            box-shadow: 0 25px 40px rgba(0,212,170,0.2), 0 0 0 1px var(--teal);
+        .advisor-card:hover { transform: perspective(800px) rotateY(3deg) translateY(-4px); border-color:rgba(0,212,170,0.4); }
+
+        .floating-demo-btn {
+            position:fixed; bottom:90px; left:22px; z-index:1000;
+            background: rgba(18,20,38,0.85); backdrop-filter:blur(14px);
+            border:1px solid rgba(245,166,35,0.45); border-radius:30px;
+            padding:0.65rem 1.5rem; display:inline-flex; align-items:center; gap:0.5rem;
+            color:var(--gold-light); font-weight:600; text-decoration:none;
+            transition:all var(--transition); box-shadow:0 0 20px rgba(245,166,35,0.2);
         }
-        .advisor-card .name {
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 0 8px rgba(255,200,0,0.5);
-        }
-        .advisor-card .dept { font-size: 0.8rem; color: var(--teal); margin: 0.3rem 0; }
-        .advisor-card .contact { font-size: 0.75rem; color: var(--muted); }
+        .floating-demo-btn:hover { background:rgba(245,166,35,0.18); box-shadow:0 0 35px rgba(245,166,35,0.55); }
 
         .countdown-bar {
-            position: fixed;
-            bottom: 0; left: 0;
-            width: 100%;
-            background: #b71c1c;
-            background-image:
-                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.12) 1px, transparent 1px),
-                radial-gradient(circle at 70% 60%, rgba(0,0,0,0.2) 2px, transparent 2px),
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 30px);
-            background-size: 40px 40px, 60px 60px, auto;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            padding: 0.7rem 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1.2rem;
-            z-index: 999;
-            flex-wrap: wrap;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.95rem;
-            backdrop-filter: blur(6px);
+            position:fixed; bottom:0; left:0; width:100%; background:#b71c1c;
+            background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 30px);
+            border-top:1px solid rgba(255,255,255,0.15); padding:0.6rem 2rem;
+            display:flex; justify-content:center; align-items:center; gap:1.5rem;
+            z-index:999; flex-wrap:wrap; color:#fff; font-weight:600;
         }
-        .countdown-bar .label {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            color: #ffcdd2;
-            text-shadow: 0 0 8px rgba(255,255,255,0.6);
-        }
-        .timer-digits {
-            display: flex;
-            gap: 0.8rem;
-        }
-        .timer-digit {
-            font-size: 1.6rem;
-            font-family: 'Inter', monospace;
-            font-weight: 700;
-            color: #fff;
-            background: rgba(0,0,0,0.4);
-            border-radius: 6px;
-            padding: 0.2rem 0.5rem;
-            text-shadow: 0 0 12px rgba(255,200,0,0.7);
-        }
+        .live-analysis { font-size:0.75rem; color:#ffcdd2; animation:fadeText 3s infinite; }
+        @keyframes fadeText { 0%,100%{ opacity:0.6; } 50%{ opacity:1; } }
+        footer { text-align:center; padding:1.2rem 0 4.5rem; color:#555; font-size:0.82rem; border-top:1px solid var(--border); margin-top:1.5rem; }
 
-        /* New floating button styles */
-        .floating-demo-btn {
-            position: fixed;
-            bottom: 85px;
-            left: 20px;
-            z-index: 1000;
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(245,166,35,0.4);
-            border-radius: 30px;
-            padding: 0.6rem 1.4rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--gold-light);
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(245,166,35,0.2);
+        @media (max-width:768px) {
+            .container { padding:1rem; }
+            .mission-vision-grid { grid-template-columns:1fr; }
+            .features-grid { grid-template-columns:1fr 1fr; }
+            .team-card { flex:0 0 170px; height:240px; }
         }
-        .floating-demo-btn:hover {
-            background: rgba(245,166,35,0.15);
-            border-color: var(--gold);
-            color: #fff;
-            box-shadow: 0 0 25px rgba(245,166,35,0.5);
-            transform: translateY(-2px);
-        }
-        .floating-demo-btn .arrow {
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-        .floating-demo-btn:hover .arrow {
-            transform: translateX(4px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 1.2rem 0 4rem;
-            color: #555;
-            font-size: 0.82rem;
-            border-top: 1px solid var(--border);
-            margin-top: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .container { padding: 1rem; }
-            .header { flex-direction: column-reverse; align-items: center; text-align: center; }
-            .uni-logo { width: 55px; }
-            .team-grid { grid-template-columns: 1fr 1fr; }
-            .member-card { height: 180px; }
-            .floating-demo-btn {
-                bottom: 80px;
-                left: 15px;
-                padding: 0.5rem 1.2rem;
-                font-size: 0.8rem;
-            }
-        }
-        @media (max-width: 480px) {
-            .team-grid { grid-template-columns: 1fr; }
-            .member-card { height: 180px; }
-            .floating-demo-btn {
-                bottom: 75px;
-                left: 10px;
-                padding: 0.5rem 1rem;
-            }
+        @media (max-width:480px) {
+            .features-grid { grid-template-columns:1fr; }
+            .team-card { flex:0 0 155px; height:225px; }
         }
     </style>
 </head>
 <body>
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
     <canvas id="bgCanvas"></canvas>
 
     <div class="container">
         <header class="header">
             <div class="hero-text">
-                <h1 class="glow-text">MarketLens AI</h1>
+                <h1>MarketLens AI</h1>
                 <p class="subtitle">Smart Cross‑Border Product Intelligence</p>
             </div>
-            <img src="https://static.igem.wiki/teams/5322/logo/njtech.png"
-                 alt="南京工业大学"
-                 class="uni-logo"
-                 loading="lazy">
+            <img src="https://static.igem.wiki/teams/5322/logo/njtech.png" alt="南京工业大学" class="uni-logo" loading="lazy">
         </header>
 
+        <div class="market-pulse">
+            <div class="pulse-indicator"><span class="pulse-dot"></span> LIVE MARKET PULSE</div>
+            <div class="scan-line"></div>
+            <span style="color:var(--muted); font-size:0.8rem;">Analyzing 12k+ products across 6 markets</span>
+        </div>
+
+        <!-- About Us - no hover tilt, stock graph inside -->
         <section>
-            <h2 class="section-title">What We Build</h2>
-            <div class="overview-card">
-                <p>
-                    <strong>MarketLens AI</strong> is an <em>intelligent decision-making agent</em> built specifically for Silk Road cross-border e-commerce.
-It answers the most critical question every international seller faces: <strong>which products will perform best in targeted overseas markets?</strong>
-Leveraging real-time market trend insights, LLM-based consumer review analysis — supported by <strong>advanced AI frameworks</strong> including <em>DeepSeek</em> and a proprietary dynamic evaluation system, MarketLens cuts through market uncertainty to deliver clear, prioritized business opportunities.
-More than just a regular analytics tool, it acts as a dedicated <em>strategic co-pilot for global trade</em>. Built to empower global and chinese exporters, it enables businesses to expand faster, operate with sharper market awareness, and make data-backed decisions with full confidence.
+            <h2 class="section-title"><span class="accent-dot"></span>About Us</h2>
+            <div class="glass-card no-tilt">
+                <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem;">
+                    MarketLens AI is an AI analytics platform built from the ground up to eliminate the guesswork in cross‑border e‑commerce. We understand the frustration of messy, scattered product data, the hours wasted manually reading through thousands of customer reviews, and the lack of a standardized way to score product potential — not to mention the eye‑watering costs of traditional industry tools. That’s why we created a solution that finally puts powerful, accessible market intelligence directly into the hands of sellers.
                 </p>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">核心能力</h2>
-            <div class="capabilities-container">
-                <p class="capabilities-text">
-                    MarketLens AI 集成了
-                    <span class="highlight-word glow-text">实时趋势情报</span>，预测跨境平台的需求信号；
-                    <span class="highlight-word glow-text">AI 评论挖掘</span>，洞察市场缺口与竞争对手弱点；
-                    <span class="highlight-word glow-text">动态评分引擎</span>，平衡需求、利润、风险和竞争权重；
-                    <span class="highlight-word glow-text">风险矩阵</span>，模拟关税变化、物流中断与汇率波动；
-                    <span class="highlight-word glow-text">交互式仪表板</span>，提供 3D 可视化与实时报告；
-                    以及内建的 <span class="highlight-word glow-text">多语言 AI 助手</span>，帮助卖家与全球受众无缝沟通。
-                    这些能力共同构成现代丝路电商的完整情报中枢。
+                <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem; margin-top:1rem;">
+                    Powered by cutting‑edge LLMs including DeepSeek and a proprietary multi‑factor evaluation engine, MarketLens transforms raw signals into crystal‑clear decisions. Whether it’s identifying emerging product trends, uncovering hidden consumer pain points through sentiment analysis, or predicting inventory risks before they happen, our platform acts as a 24/7 strategic co‑pilot that continuously learns and improves. We don’t just show you data — we show you what to do with it.
                 </p>
-            </div>
-        </section>
-
-        <section>
-            <h2 class="section-title">The Team</h2>
-            <div class="team-grid" id="teamGrid">
-                <!-- Abdullah – Team Leader (Captain) -->
-                <div class="member-card" onclick="void(0)">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="name glow-text" style="font-size:1.4rem; text-shadow: 0 0 15px rgba(255,200,0,0.9);">Abdullah Bin Fahad</div>
-                            <div class="chinese-name" style="color:#ffd966;">(明远)</div>
-                            <div class="major">Automation Engineering</div>
-                            <div class="role" style="font-weight:bold;">★ Team Captain</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="bio">Brings clarity, determination, and a strong AI strategy to the project. Drives the OPC intelligent agent concept from idea to implementation.</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Rokeya -->
-                <div class="member-card" onclick="void(0)">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="name glow-text">Rokeya Zaman</div>
-                            <div class="chinese-name">(洛娅)</div>
-                            <div class="major">Automation Engineering</div>
-                            <div class="role">Data Scientist & AI</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="bio">A dedicated and analytical mind from Nanjing Tech University, Rokeya transforms raw data into powerful insights with her business mind.</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Shayne -->
-                <div class="member-card" onclick="void(0)">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="name glow-text">Shayne Lorraine</div>
-                            <div class="chinese-name">(罗嘉敏)</div>
-                            <div class="major">Computer Science</div>
-                            <div class="role">Full‑Stack Dev</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="bio">A creative problem‑solver at Nanjing Tech University, Shayne builds elegant and robust digital solutions with her robust technical skills.</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Revy -->
-                <div class="member-card" onclick="void(0)">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="name glow-text">Revy Syawal Rizki</div>
-                            <div class="chinese-name">(莱薇)</div>
-                            <div class="major">Computer Science</div>
-                            <div class="role">Backend Engineer</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="bio">An enthusiastic learner at Nanjing Tech University, Revy brings fresh ideas and a keen eye for user experience also an expert analytics and researcher.</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Brian -->
-                <div class="member-card" onclick="void(0)">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="name glow-text">Brian Mavenrich</div>
-                            <div class="chinese-name">(吴魏亮)</div>
-                            <div class="major">Computer Science</div>
-                            <div class="role">Frontend & Data Analytics</div>
-                        </div>
-                        <div class="card-back">
-                            <div class="bio">A reliable and methodical thinker from Nanjing Tech University, Brian ensures every system runs smoothly and securely. Expert in Frontend and data entry.</div>
-                        </div>
-                    </div>
+                <!-- real stock market graph animation -->
+                <div class="stock-graph-area">
+                    <div class="candle"></div><div class="candle"></div><div class="candle"></div>
+                    <div class="candle"></div><div class="candle"></div><div class="candle"></div>
+                    <div class="candle"></div><div class="candle"></div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2 class="section-title">Faculty Advisors</h2>
+            <h2 class="section-title"><span class="accent-dot"></span>Mission & Vision</h2>
+            <div class="mission-vision-grid">
+                <div class="mv-card mission">
+                    <span class="mv-icon">🎯</span>
+                    <h3>Our Mission</h3>
+                    <p>Empower cross-border sellers with accessible, accurate AI market intelligence. Turn scattered data and reviews into data-backed product selections that cut inventory risk and lift profitability.</p>
+                </div>
+                <div class="mv-card vision">
+                    <span class="mv-icon">🔭</span>
+                    <h3>Our Vision</h3>
+                    <p>Become the all-in-one self-improving AI decision engine for every merchant – adapting to global shifts, consumer sentiment, and competition so sellers stay ahead.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title"><span class="accent-dot"></span>What Makes Us Different</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h4>Custom Multi-Factor Scoring</h4>
+                    <p>GO / CAUTION / PASS signals combining demand, competition & profitability.</p>
+                    <div class="mini-chart"><div class="ring-spin"></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h4>LLM Sentiment Analysis</h4>
+                    <p>Auto-dig complaints & market gaps with DeepSeek-powered pipelines.</p>
+                    <div class="mini-chart"><div class="equalizer"><span></span><span></span><span></span><span></span><span></span></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h4>Automated Data Pipeline</h4>
+                    <p>Real-time React dashboard, no manual wrangling.</p>
+                    <div class="mini-chart"><div class="flow-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💡</span>
+                    <h4>Lightweight & Affordable</h4>
+                    <p>Enterprise-grade intelligence at a fraction of competitor costs.</p>
+                    <div class="mini-chart"><div class="bar-compare"><div class="col high"></div><div class="col low"></div></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌍</span>
+                    <h4>Cross-Market Adaptability</h4>
+                    <p>Works across global marketplaces with a consistent framework.</p>
+                    <div class="mini-chart"><div class="globe-ring"></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h4>Continuous Learning</h4>
+                    <p>AI refines scoring models based on real outcomes.</p>
+                    <div class="mini-chart"><div class="sparkline"></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h4>Real-Time Analytics Engine</h4>
+                    <p>Live dashboards, trend forecasting & risk matrices.</p>
+                    <div class="mini-chart"><div class="candlestick-mini"><span></span><span></span><span></span><span></span><span></span></div></div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h4>Multi-Language AI Assistant</h4>
+                    <p>Built-in assistant for seamless global communication.</p>
+                    <div class="mini-chart"><div class="typing-dots"><span></span><span></span><span></span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title"><span class="accent-dot"></span>The Team</h2>
+            <div class="team-row-wrapper">
+                <div class="team-row" id="teamRow">
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front">
+                                <div class="avatar-circle">A</div>
+                                <div class="name">Abdullah Bin Fahad</div>
+                                <div class="chinese-name">(明远)</div>
+                                <div class="major">Automation Engineering</div>
+                                <div class="role captain">★ Team Captain</div>
+                            </div>
+                            <div class="team-card-back">
+                                <div class="bio">Clarity, determination, AI strategy. Leads the OPC intelligent agent concept.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front"><div class="avatar-circle">R</div><div class="name">Rokeya Zaman</div><div class="chinese-name">(洛娅)</div><div class="major">Automation Engineering</div><div class="role">Data Scientist & AI</div></div>
+                            <div class="team-card-back"><div class="bio">Dedicated analytical mind, transforms raw data into business insights.</div></div>
+                        </div>
+                    </div>
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front"><div class="avatar-circle">S</div><div class="name">Shayne Lorraine</div><div class="chinese-name">(罗嘉敏)</div><div class="major">Computer Science</div><div class="role">Full‑Stack Dev</div></div>
+                            <div class="team-card-back"><div class="bio">Creative problem‑solver building elegant digital solutions.</div></div>
+                        </div>
+                    </div>
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front"><div class="avatar-circle">R</div><div class="name">Revy Syawal Rizki</div><div class="chinese-name">(莱薇)</div><div class="major">Computer Science</div><div class="role">Backend Engineer</div></div>
+                            <div class="team-card-back"><div class="bio">Enthusiastic learner, expert in analytics and research.</div></div>
+                        </div>
+                    </div>
+                    <div class="team-card" data-flip>
+                        <div class="team-card-inner">
+                            <div class="team-card-front"><div class="avatar-circle">B</div><div class="name">Brian Mavenrich</div><div class="chinese-name">(吴魏亮)</div><div class="major">Computer Science</div><div class="role">Frontend & Data</div></div>
+                            <div class="team-card-back"><div class="bio">Reliable methodical thinker, ensures smooth secure systems.</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title"><span class="accent-dot"></span>Faculty Advisors</h2>
             <div class="advisor-row">
                 <div class="advisor-card">
-                    <div class="name glow-text">刘琉 · Liu Liu</div>
+                    <div class="name">刘琉 · Liu Liu</div>
                     <div class="dept">Overseas Education College, Nanjing Tech University</div>
                     <div class="contact">📧 liuliu@njtech.edu.cn</div>
                 </div>
                 <div class="advisor-card">
-                    <div class="name glow-text">张军强 · Zhang Junqiang</div>
+                    <div class="name">张军强 · Zhang Junqiang</div>
                     <div class="dept">School of Computer Science, Nanjing Tech University</div>
                     <div class="contact">📧 zjunqiang@126.com</div>
                 </div>
@@ -524,95 +518,85 @@ More than just a regular analytics tool, it acts as a dedicated <em>strategic co
         </section>
     </div>
 
-    <!-- Floating button linking to the live demo -->
-    <a href="https://marketlens-ai.streamlit.app/" target="_blank" class="floating-demo-btn">
-        <span>Try</span>
-        <span class="arrow">→</span>
-    </a>
+    <a href="https://marketlens-ai.streamlit.app/" target="_blank" class="floating-demo-btn">Try Live Demo →</a>
 
     <div class="countdown-bar">
         <span class="label">🚀 Finals Countdown</span>
         <div class="timer-digits" id="timerDigits"></div>
+        <span class="live-analysis" id="liveAnalysis">Analyzing market trends...</span>
     </div>
 
-    <footer>
-        <p>© 2026 MarketLens AI · Nanjing Tech University · OPC Intelligent Agent Innovation Track</p>
-    </footer>
+    <footer>© 2026 MarketLens AI · Nanjing Tech University · OPC Intelligent Agent Innovation Track</footer>
 
     <script>
-        // Animated background particles
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-        let w, h, particles;
-
-        function resizeCanvas() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        function createParticles() {
-            particles = [];
-            for (let i=0; i<80; i++) {
-                particles.push({
-                    x: Math.random()*w,
-                    y: Math.random()*h,
-                    r: Math.random()*3+1,
-                    dx: (Math.random()-0.5)*0.4,
-                    dy: (Math.random()-0.5)*0.4,
-                    hue: Math.random()<0.5?40:330
-                });
+        (function() {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            let w, h, particles;
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
             }
-        }
-        createParticles();
-
-        function drawParticles() {
-            ctx.clearRect(0,0,w,h);
-            for(let p of particles) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                ctx.fillStyle = p.hue===40 ? `hsla(40,90%,65%,0.7)` : `hsla(330,80%,65%,0.7)`;
-                ctx.fill();
-                p.x+=p.dx; p.y+=p.dy;
-                if(p.x<0||p.x>w) p.dx*=-1;
-                if(p.y<0||p.y>h) p.dy*=-1;
+            window.addEventListener('resize', resize);
+            resize();
+            function createParticles() {
+                particles = [];
+                for (let i=0; i<80; i++) {
+                    particles.push({
+                        x: Math.random()*w, y: Math.random()*h,
+                        r: Math.random()*3+1,
+                        dx: (Math.random()-0.5)*0.4,
+                        dy: (Math.random()-0.5)*0.4,
+                        hue: Math.random()<0.5?40:330,
+                    });
+                }
             }
-            requestAnimationFrame(drawParticles);
-        }
-        drawParticles();
+            createParticles();
+            function draw() {
+                ctx.clearRect(0,0,w,h);
+                for(let p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                    ctx.fillStyle = p.hue===40 ? 'hsla(40,90%,65%,0.7)' : 'hsla(330,80%,65%,0.7)';
+                    ctx.fill();
+                    p.x+=p.dx; p.y+=p.dy;
+                    if(p.x<0||p.x>w) p.dx*=-1;
+                    if(p.y<0||p.y>h) p.dy*=-1;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+            window.addEventListener('resize', () => { resize(); createParticles(); });
 
-        // Team card click toggle for mobile
-        const teamGrid = document.getElementById('teamGrid');
-        if (teamGrid) {
-            teamGrid.addEventListener('click', function(e) {
-                const card = e.target.closest('.member-card');
-                if (!card) return;
-                card.classList.toggle('flipped');
+            const teamRow = document.getElementById('teamRow');
+            teamRow?.addEventListener('click', e => {
+                const card = e.target.closest('.team-card');
+                if (card) card.classList.toggle('flipped');
             });
-        }
 
-        // Countdown timer
-        const target = new Date('2026-10-20T00:00:00+08:00').getTime();
-        const timer = document.getElementById('timerDigits');
-        function updateTimer() {
-            const now = Date.now();
-            const dist = target - now;
-            if(dist<=0) {
-                timer.innerHTML = '<span class="timer-digit">00</span>d <span class="timer-digit">00</span>h <span class="timer-digit">00</span>m <span class="timer-digit">00</span>s';
-                return;
+            const target = new Date('2026-10-20T00:00:00+08:00').getTime();
+            const timer = document.getElementById('timerDigits');
+            function updateTimer() {
+                const now = Date.now();
+                const dist = target - now;
+                if (dist <= 0) {
+                    timer.innerHTML = '<span>00</span>d <span>00</span>h <span>00</span>m <span>00</span>s';
+                    return;
+                }
+                const d = Math.floor(dist/86400000);
+                const h = Math.floor((dist%86400000)/3600000);
+                const m = Math.floor((dist%3600000)/60000);
+                const s = Math.floor((dist%60000)/1000);
+                timer.innerHTML = `<span>${String(d).padStart(2,'0')}</span>d <span>${String(h).padStart(2,'0')}</span>h <span>${String(m).padStart(2,'0')}</span>m <span>${String(s).padStart(2,'0')}</span>s`;
             }
-            const d = Math.floor(dist/86400000);
-            const h = Math.floor((dist%86400000)/3600000);
-            const m = Math.floor((dist%3600000)/60000);
-            const s = Math.floor((dist%60000)/1000);
-            timer.innerHTML = `<span class="timer-digit">${String(d).padStart(2,'0')}</span>d
-                               <span class="timer-digit">${String(h).padStart(2,'0')}</span>h
-                               <span class="timer-digit">${String(m).padStart(2,'0')}</span>m
-                               <span class="timer-digit">${String(s).padStart(2,'0')}</span>s`;
-        }
-        updateTimer();
-        setInterval(updateTimer, 1000);
+            updateTimer();
+            setInterval(updateTimer, 1000);
+
+            const analysisEl = document.getElementById('liveAnalysis');
+            const phrases = ["Analyzing market trends...","Scanning consumer sentiment...","Updating product scores...","Monitoring competitor moves..."];
+            let i = 0;
+            setInterval(() => { i=(i+1)%phrases.length; analysisEl.textContent = phrases[i]; }, 3000);
+        })();
     </script>
 </body>
 </html>
