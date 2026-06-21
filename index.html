@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://marketlens.ai">
     <link rel="canonical" href="https://marketlens.ai">
     <title>MarketLens AI – 智能跨境商品情报助手</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #090a16;
@@ -38,10 +38,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
-        #bgCanvas {
-            position: fixed; top:0; left:0; width:100%; height:100%;
-            z-index:-2; opacity:0.35; pointer-events:none;
-        }
+        #bgCanvas { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-2; opacity:0.35; pointer-events:none; }
         .ambient-orb {
             position: fixed; border-radius:50%; filter:blur(140px);
             opacity:0.12; pointer-events:none; z-index:-1;
@@ -73,8 +70,8 @@
             50%{ filter: brightness(1.25) drop-shadow(0 0 32px rgba(255,201,64,0.8)); }
         }
         .hero-text .subtitle { font-size:1rem; text-transform:uppercase; letter-spacing:3.5px; color:var(--muted); font-weight:500; }
-        .uni-logo { width:72px; transition: transform var(--transition); filter:drop-shadow(0 0 10px rgba(255,255,255,0.15)); }
-        .uni-logo:hover { transform:scale(1.08); filter:drop-shadow(0 0 20px rgba(245,166,35,0.5)); }
+        .uni-logo { width:72px; transition: filter 0.3s, box-shadow 0.3s; filter:drop-shadow(0 0 10px rgba(255,255,255,0.15)); }
+        .uni-logo:hover { filter:drop-shadow(0 0 20px rgba(245,166,35,0.5)); }
 
         .market-pulse {
             background: rgba(20,22,41,0.65); backdrop-filter: blur(14px); border:1px solid var(--border);
@@ -94,6 +91,83 @@
             animation:scanMove 3s linear infinite;
         }
         @keyframes scanMove { 0%{ left:-30%; } 100%{ left:130%; } }
+
+        .cta-row {
+            display: flex; align-items: center; justify-content: center; gap: 2rem;
+            flex-wrap: wrap; margin-bottom: 2.5rem; padding: 0.5rem 0;
+        }
+        .btn-liquid {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.9rem 2rem; border-radius: 40px; font-weight: 700;
+            font-size: 1.05rem; letter-spacing: 0.3px; cursor: pointer; text-decoration: none;
+            transition: all var(--transition); position: relative; overflow: hidden;
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2); color: #fff;
+            background: rgba(0, 180, 160, 0.15);
+        }
+        .btn-liquid::before {
+            content: ''; position: absolute; top: -30%; left: -20%;
+            width: 140%; height: 160%;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 212, 170, 0.3), rgba(245, 166, 35, 0.2), transparent 70%);
+            opacity: 0.7; animation: liquidMove 4s ease-in-out infinite alternate; z-index: 0;
+        }
+        .btn-liquid::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 60%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+            border-radius: 40px 40px 0 0; pointer-events: none; z-index: 1;
+        }
+        .btn-liquid span { position: relative; z-index: 2; }
+        @keyframes liquidMove {
+            0% { transform: translateX(-10%) translateY(-5%) rotate(0deg); }
+            100% { transform: translateX(10%) translateY(5%) rotate(10deg); }
+        }
+        .btn-primary {
+            background: rgba(0, 212, 170, 0.18); border-color: rgba(0, 212, 170, 0.5);
+            box-shadow: 0 0 25px rgba(0,212,170,0.2);
+        }
+        .btn-primary:hover {
+            background: rgba(0, 212, 170, 0.3); border-color: rgba(0, 212, 170, 0.8);
+            box-shadow: 0 0 40px rgba(0,212,170,0.4);
+        }
+        .btn-phone {
+            background: rgba(155, 93, 229, 0.15); border-color: rgba(155, 93, 229, 0.4);
+            box-shadow: 0 0 20px rgba(155,93,229,0.15);
+        }
+        .btn-phone:hover {
+            background: rgba(155, 93, 229, 0.25); border-color: rgba(155, 93, 229, 0.7);
+            box-shadow: 0 0 35px rgba(155,93,229,0.35);
+        }
+        .phone-svg { width:18px; height:18px; position:relative; z-index:2; }
+
+        .logo-ticker-wrapper { margin-bottom: 2.5rem; }
+        .logo-ticker-label { text-align: center; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 0.8rem; opacity: 0.7; }
+        .logo-ticker {
+            overflow: hidden; width: 100%; background: rgba(20,22,41,0.4);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border); border-radius: 16px; padding: 1rem 0; position: relative;
+        }
+        .logo-ticker::before, .logo-ticker::after {
+            content: ''; position: absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+        }
+        .logo-ticker::before { left:0; background:linear-gradient(90deg, rgba(20,22,41,0.85) 0%, transparent 100%); border-radius:16px 0 0 16px; }
+        .logo-ticker::after { right:0; background:linear-gradient(270deg, rgba(20,22,41,0.85) 0%, transparent 100%); border-radius:0 16px 16px 0; }
+        .logo-track {
+            display: flex; gap: 2.5rem; align-items: center;
+            animation: tickerScroll 35s linear infinite;
+            width: max-content; padding: 0 1rem; white-space: nowrap;
+        }
+        .logo-track:hover { animation-play-state: paused; }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .logo-item {
+            flex-shrink: 0; display: flex; align-items: center; gap: 0.6rem;
+            font-weight: 600; font-size: 0.95rem; color: #d0d3e0; opacity: 0.85;
+            transition: opacity 0.3s; cursor: default;
+        }
+        .logo-item:hover { opacity: 1; color: #fff; }
+        .logo-item svg { width: 28px; height: 28px; flex-shrink: 0; }
 
         .section-title {
             font-size:1.7rem; font-weight:700; margin-bottom:1.4rem; color:var(--text);
@@ -115,63 +189,43 @@
             background: var(--glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border:1px solid var(--border); border-radius:var(--radius-xl);
             padding:2rem 2.2rem; margin-bottom:2.5rem;
-            transition: all var(--transition); position:relative; overflow:hidden;
+            transition: box-shadow 0.3s, border-color 0.3s; position:relative; overflow:hidden;
             box-shadow:0 8px 40px rgba(0,0,0,0.35);
         }
-        .no-tilt { transform: none !important; }
-        .glass-card.no-tilt:hover { transform: none !important; }
+        .glass-card:hover {
+            border-color: rgba(255,255,255,0.18);
+            box-shadow: 0 0 35px rgba(0,212,170,0.15), 0 8px 40px rgba(0,0,0,0.35);
+        }
 
-        /* About Us background charts */
         .about-bg-charts {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            position: absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;
         }
         .bg-chart {
-            position: absolute;
-            opacity: 0.12;
-            animation: chartFloat 12s ease-in-out infinite alternate;
+            position: absolute; opacity:0.12; animation: chartFloat 12s ease-in-out infinite alternate;
         }
-        .bg-chart.chart1 {
-            top: 10%;
-            right: 5%;
-            width: 40%;
-            max-width: 350px;
-            height: auto;
-        }
-        .bg-chart.chart2 {
-            bottom: 10%;
-            left: 5%;
-            width: 35%;
-            max-width: 300px;
-            height: auto;
-            animation-delay: -6s;
-        }
+        .bg-chart.chart1 { top:10%; right:5%; width:40%; max-width:350px; }
+        .bg-chart.chart2 { bottom:10%; left:5%; width:35%; max-width:300px; animation-delay:-6s; }
         @keyframes chartFloat {
             0% { transform: translateY(0) scale(1); }
             100% { transform: translateY(-8px) scale(1.02); }
         }
-        .about-text {
-            position: relative;
-            z-index: 1;
-        }
+        .about-text { position: relative; z-index:1; }
 
         .mission-vision-grid {
             display:grid; grid-template-columns:1fr 1fr; gap:1.8rem; margin-bottom:2.5rem;
         }
         .mv-card {
             background: var(--glass); backdrop-filter: blur(20px); border:1px solid var(--border);
-            border-radius:var(--radius-xl); padding:2rem; transition: all var(--transition);
-            transform-style: preserve-3d; cursor:pointer;
+            border-radius:var(--radius-xl); padding:2rem;
+            transition: box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
         }
         .mv-card:hover {
-            transform: perspective(800px) rotateX(3deg) rotateY(-2deg) translateY(-6px);
-            border-color: rgba(255,255,255,0.25); box-shadow:0 25px 60px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 0 45px rgba(245,166,35,0.15), 0 25px 60px rgba(0,0,0,0.5);
         }
-        .mv-card .mv-icon { font-size:2.4rem; margin-bottom:0.8rem; display:inline-block; transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-        .mv-card:hover .mv-icon { transform: translateX(6px) scale(1.25) rotate(3deg); }
+        .mv-card .mv-icon { font-size:2.4rem; margin-bottom:0.8rem; display:inline-block; transition: transform 0.3s; }
+        .mv-card:hover .mv-icon { transform: scale(1.1); }
         .mv-card h3 { font-size:1.3rem; color:#fff; margin-bottom:0.6rem; }
         .mv-card p { color:#bcc0cc; line-height:1.7; font-size:0.95rem; }
 
@@ -181,40 +235,30 @@
         }
         .feature-card {
             background: var(--glass); backdrop-filter: blur(18px); border:1px solid var(--border);
-            border-radius:var(--radius-lg); padding:1.6rem; transition: all var(--transition);
-            transform-style: preserve-3d; cursor:pointer;
+            border-radius:var(--radius-lg); padding:1.6rem;
+            transition: box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
         }
         .feature-card:hover {
-            transform: perspective(800px) rotateX(4deg) rotateY(-3deg) translateY(-5px) scale(1.02);
-            border-color: rgba(255,255,255,0.25); box-shadow:0 25px 50px rgba(0,0,0,0.5);
+            border-color: rgba(255,255,255,0.25);
+            box-shadow: 0 0 50px rgba(0,212,170,0.2), 0 25px 50px rgba(0,0,0,0.5);
         }
-        .feature-card .feature-icon {
-            font-size:2.2rem; margin-bottom:0.7rem; display:inline-block;
-            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-        }
-        .feature-card:hover .feature-icon { transform: translateX(8px) scale(1.3) rotate(8deg); }
+        .feature-card .feature-icon { font-size:2.2rem; margin-bottom:0.7rem; display:inline-block; transition: transform 0.3s; }
+        .feature-card:hover .feature-icon { transform: scale(1.1); }
         .feature-card h4 { font-size:1.05rem; font-weight:700; color:#fff; margin-bottom:0.4rem; }
         .feature-card p { font-size:0.88rem; color:#a8acba; line-height:1.55; }
 
-        .mini-chart {
-            margin-top:1.2rem; display:flex; align-items:center; gap:0.8rem;
-            position:relative; z-index:2;
-        }
+        .mini-chart { margin-top:1.2rem; display:flex; align-items:center; gap:0.8rem; position:relative; z-index:2; }
         .ring-spin {
             width:45px; height:45px; border-radius:50%;
             background:conic-gradient(var(--gold) 0deg 120deg, var(--teal) 120deg 240deg, var(--purple) 240deg 360deg);
-            animation: ringSpin 4s linear infinite; box-shadow:0 0 18px rgba(245,166,35,0.4);
+            animation: ringSpin 4s linear infinite; box-shadow:0 0 18px rgba(245,166,35,0.4); position:relative;
         }
         .ring-spin::after { content:''; position:absolute; inset:8px; border-radius:50%; background:var(--card-bg); }
         @keyframes ringSpin { to{ transform:rotate(360deg); } }
 
-        .equalizer {
-            display:flex; align-items:flex-end; gap:3px; height:40px;
-        }
-        .equalizer span {
-            width:5px; border-radius:2px; background:var(--teal);
-            animation:eqBounce 0.9s ease-in-out infinite alternate;
-        }
+        .equalizer { display:flex; align-items:flex-end; gap:3px; height:40px; }
+        .equalizer span { width:5px; border-radius:2px; background:var(--teal); animation:eqBounce 0.9s ease-in-out infinite alternate; }
         .equalizer span:nth-child(1){ height:70%; animation-delay:0s; }
         .equalizer span:nth-child(2){ height:90%; animation-delay:0.1s; }
         .equalizer span:nth-child(3){ height:50%; animation-delay:0.2s; }
@@ -222,24 +266,15 @@
         .equalizer span:nth-child(5){ height:60%; animation-delay:0.4s; }
         @keyframes eqBounce { 0%{ transform:scaleY(0.6); } 100%{ transform:scaleY(1); } }
 
-        .flow-dots {
-            display:flex; gap:6px; align-items:center;
-        }
-        .flow-dots .dot {
-            width:6px; height:6px; border-radius:50%; background:var(--gold);
-            animation:dotFlow 1.2s ease-in-out infinite alternate;
-        }
+        .flow-dots { display:flex; gap:6px; align-items:center; }
+        .flow-dots .dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:dotFlow 1.2s ease-in-out infinite alternate; }
         .flow-dots .dot:nth-child(2){ animation-delay:0.2s; }
         .flow-dots .dot:nth-child(3){ animation-delay:0.4s; }
         .flow-dots .dot:nth-child(4){ animation-delay:0.6s; }
         @keyframes dotFlow { 0%{ transform:translateY(0); opacity:0.6; } 100%{ transform:translateY(-8px); opacity:1; } }
 
-        .bar-compare {
-            display:flex; align-items:flex-end; gap:10px; height:40px;
-        }
-        .bar-compare .col {
-            width:16px; border-radius:4px 4px 0 0;
-        }
+        .bar-compare { display:flex; align-items:flex-end; gap:10px; height:40px; }
+        .bar-compare .col { width:16px; border-radius:4px 4px 0 0; }
         .bar-compare .col.high { background:var(--gold); height:90%; animation:highGrow 1.8s ease-in-out infinite alternate; }
         .bar-compare .col.low { background:var(--teal); height:50%; animation:lowGrow 1.8s ease-in-out infinite alternate; }
         @keyframes highGrow { 0%{ height:85%; } 100%{ height:95%; } }
@@ -250,25 +285,16 @@
             position:relative; animation:globeSpin 6s linear infinite;
         }
         .globe-ring::after {
-            content:''; position:absolute; top:6px; left:6px;
-            width:24px; height:24px; border-radius:50%;
+            content:''; position:absolute; top:6px; left:6px; width:24px; height:24px; border-radius:50%;
             background:radial-gradient(circle at 30% 30%, var(--gold), var(--purple));
         }
         @keyframes globeSpin { to{ transform:rotate(360deg); } }
 
-        .sparkline {
-            width:80px; height:30px; background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg"><polyline points="0,25 15,20 30,22 45,8 60,18 75,10 100,15" fill="none" stroke="%23f5a623" stroke-width="2"/></svg>') no-repeat center;
-            background-size:contain; animation:sparkMove 2s ease-in-out infinite alternate;
-        }
+        .sparkline { width:80px; height:30px; background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg"><polyline points="0,25 15,20 30,22 45,8 60,18 75,10 100,15" fill="none" stroke="%23f5a623" stroke-width="2"/></svg>') no-repeat center; background-size:contain; animation:sparkMove 2s ease-in-out infinite alternate; }
         @keyframes sparkMove { 0%{ transform:translateX(-2px); } 100%{ transform:translateX(2px); } }
 
-        .candlestick-mini {
-            display:flex; align-items:flex-end; gap:2px; height:40px;
-        }
-        .candlestick-mini span {
-            width:5px; background:var(--gold); border-radius:1px;
-            animation:candleAnim 1.2s ease-in-out infinite alternate;
-        }
+        .candlestick-mini { display:flex; align-items:flex-end; gap:2px; height:40px; }
+        .candlestick-mini span { width:5px; background:var(--gold); border-radius:1px; animation:candleAnim 1.2s ease-in-out infinite alternate; }
         .candlestick-mini span:nth-child(1){ height:70%; animation-delay:0s; }
         .candlestick-mini span:nth-child(2){ height:90%; animation-delay:0.1s; }
         .candlestick-mini span:nth-child(3){ height:40%; animation-delay:0.2s; }
@@ -276,25 +302,21 @@
         .candlestick-mini span:nth-child(5){ height:55%; animation-delay:0.4s; }
         @keyframes candleAnim { 0%{ transform:scaleY(0.8); } 100%{ transform:scaleY(1.1); } }
 
-        .typing-dots {
-            display:flex; gap:4px; align-items:center;
-        }
-        .typing-dots span {
-            width:6px; height:6px; border-radius:50%; background:var(--teal);
-            animation:typingBounce 0.8s infinite alternate;
-        }
-        .typing-dots span:nth-child(2){ animation-delay:0.2s; }
-        .typing-dots span:nth-child(3){ animation-delay:0.4s; }
+        .typing-dots { display:flex; gap:4px; align-items:center; }
+        .typing-dots span { width:6px; height:6px; border-radius:50%; background:var(--teal); animation:typingBounce 0.8s infinite alternate; }
+        .typing-dots span:nth-child(2){ animation-delay:0.2s; } .typing-dots span:nth-child(3){ animation-delay:0.4s; }
         @keyframes typingBounce { 0%{ transform:translateY(0); } 100%{ transform:translateY(-6px); } }
 
-        /* Team cards */
         .team-row-wrapper { overflow-x:auto; padding-bottom:0.8rem; margin-bottom:2rem; }
         .team-row { display:flex; gap:1.2rem; min-width:min-content; padding:0.3rem; }
         .team-card {
             flex:0 0 210px; perspective:1000px; cursor:pointer; height:300px;
-            transition: transform var(--transition);
+            transition: box-shadow 0.3s, border-color 0.3s;
         }
-        .team-card:hover { transform: translateY(-8px) scale(1.02); }
+        .team-card:hover {
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 0 35px rgba(245,166,35,0.3);
+        }
         .team-card-inner {
             position:relative; width:100%; height:100%;
             transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
@@ -306,7 +328,8 @@
             border-radius:var(--radius-lg); display:flex; flex-direction:column;
             align-items:center; justify-content:center; text-align:center;
             background: rgba(18,20,38,0.85); backdrop-filter:blur(16px);
-            border:1px solid var(--border); padding:1.2rem; box-shadow:0 10px 35px rgba(0,0,0,0.3);
+            border:1px solid var(--border); padding:1.2rem;
+            box-shadow:0 10px 35px rgba(0,0,0,0.3);
         }
         .team-card-back { transform:rotateY(180deg); background:rgba(16,18,34,0.92); }
         .avatar-circle {
@@ -318,146 +341,97 @@
             box-shadow:0 0 20px rgba(245,166,35,0.25);
         }
 
-        /* Distinct role visuals */
-        .role-visual {
-            margin-top: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: 30px;
-        }
-        /* Captain: concentric pulse */
-        .pulse-ring {
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            background: var(--gold);
-            animation: pulseRing 1.5s ease-out infinite;
-        }
-        @keyframes pulseRing {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            100% { transform: scale(1.8); opacity: 0; }
-        }
-        /* Data Scientist: color-shifting bars */
-        .color-bars {
-            display: flex; gap: 2px; align-items: flex-end;
-        }
-        .color-bars span {
-            width: 6px;
-            border-radius: 2px;
-            animation: colorBarAnim 1.2s ease-in-out infinite alternate;
-        }
-        .color-bars span:nth-child(1) { height: 14px; background: var(--teal); }
-        .color-bars span:nth-child(2) { height: 20px; background: var(--gold); animation-delay: 0.15s; }
-        .color-bars span:nth-child(3) { height: 10px; background: var(--purple); animation-delay: 0.3s; }
-        @keyframes colorBarAnim {
-            0% { transform: scaleY(0.7); }
-            100% { transform: scaleY(1.3); }
-        }
-        /* Full-Stack: spinning gear + spark */
-        .gear-spark {
-            width: 20px; height: 20px;
-            border: 2px solid var(--gold);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: gearSpin 2s linear infinite;
-            position: relative;
-        }
-        .gear-spark::after {
-            content: '';
-            position: absolute;
-            top: 2px; left: 6px;
-            width: 4px; height: 4px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkFlash 0.8s infinite alternate;
-        }
-        @keyframes gearSpin { to { transform: rotate(360deg); } }
-        @keyframes sparkFlash {
-            0% { opacity: 0.3; box-shadow: 0 0 4px white; }
-            100% { opacity: 1; box-shadow: 0 0 12px var(--gold); }
-        }
-        /* Backend: database pulsing */
-        .db-pulse {
-            width: 22px; height: 18px;
-            border: 2px solid var(--teal);
-            border-radius: 3px 3px 0 0;
-            position: relative;
-            animation: dbGlow 1.2s infinite;
-        }
-        .db-pulse::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 2px;
-            width: 16px; height: 4px;
-            background: var(--teal);
-            border-radius: 0 0 2px 2px;
-        }
-        @keyframes dbGlow {
-            0%,100% { box-shadow: 0 0 6px var(--teal); }
-            50% { box-shadow: 0 0 18px var(--teal); }
-        }
-        /* Frontend/Data: animated line drawing */
-        .line-draw {
-            width: 28px; height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><path d="M0,15 L5,8 L10,12 L15,3 L20,10 L25,5 L30,12" stroke="%23f5a623" fill="none" stroke-width="1.5" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="2s" repeatCount="indefinite"/></path></svg>') no-repeat center;
-            background-size: contain;
-        }
+        .role-visual { margin-top:0.5rem; display:inline-flex; align-items:center; justify-content:center; height:30px; }
+        .pulse-ring { width:20px; height:20px; border-radius:50%; background:var(--gold); animation: pulseRing 1.5s ease-out infinite; }
+        @keyframes pulseRing { 0%{ transform:scale(0.8); opacity:0.8; } 100%{ transform:scale(1.8); opacity:0; } }
+        .color-bars { display:flex; gap:2px; align-items:flex-end; }
+        .color-bars span { width:6px; border-radius:2px; animation:colorBarAnim 1.2s ease-in-out infinite alternate; }
+        .color-bars span:nth-child(1){ height:14px; background:var(--teal); }
+        .color-bars span:nth-child(2){ height:20px; background:var(--gold); animation-delay:0.15s; }
+        .color-bars span:nth-child(3){ height:10px; background:var(--purple); animation-delay:0.3s; }
+        @keyframes colorBarAnim { 0%{ transform:scaleY(0.7); } 100%{ transform:scaleY(1.3); } }
+        .gear-spark { width:20px; height:20px; border:2px solid var(--gold); border-radius:50%; border-top-color:transparent; animation: gearSpin 2s linear infinite; position:relative; }
+        .gear-spark::after { content:''; position:absolute; top:2px; left:6px; width:4px; height:4px; background:white; border-radius:50%; animation: sparkFlash 0.8s infinite alternate; }
+        @keyframes gearSpin { to{ transform:rotate(360deg); } }
+        @keyframes sparkFlash { 0%{ opacity:0.3; box-shadow:0 0 4px white; } 100%{ opacity:1; box-shadow:0 0 12px var(--gold); } }
+        .db-pulse { width:22px; height:18px; border:2px solid var(--teal); border-radius:3px 3px 0 0; position:relative; animation: dbGlow 1.2s infinite; }
+        .db-pulse::after { content:''; position:absolute; bottom:-4px; left:2px; width:16px; height:4px; background:var(--teal); border-radius:0 0 2px 2px; }
+        @keyframes dbGlow { 0%,100%{ box-shadow:0 0 6px var(--teal); } 50%{ box-shadow:0 0 18px var(--teal); } }
+        .line-draw { width:28px; height:20px; background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg"><path d="M0,15 L5,8 L10,12 L15,3 L20,10 L25,5 L30,12" stroke="%23f5a623" fill="none" stroke-width="1.5" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" from="60" to="0" dur="2s" repeatCount="indefinite"/></path></svg>') no-repeat center; background-size:contain; }
 
         .advisor-row { display:flex; flex-wrap:wrap; gap:1.5rem; margin-bottom:2.5rem; }
         .advisor-card {
             background: var(--glass); backdrop-filter:blur(14px); border:1px solid var(--border);
             border-radius:var(--radius-lg); padding:1.4rem 1.6rem; flex:1 1 260px;
-            transition: all var(--transition); cursor:pointer;
+            cursor: default;
         }
-        .advisor-card:hover { transform: perspective(800px) rotateY(3deg) translateY(-4px); border-color:rgba(0,212,170,0.4); }
 
-        .floating-demo-btn {
-            position:fixed; bottom:90px; left:22px; z-index:1000;
-            background: rgba(18,20,38,0.85); backdrop-filter:blur(14px);
-            border:1px solid rgba(245,166,35,0.45); border-radius:30px;
-            padding:0.65rem 1.5rem; display:inline-flex; align-items:center; gap:0.5rem;
-            color:var(--gold-light); font-weight:600; text-decoration:none;
-            transition:all var(--transition); box-shadow:0 0 20px rgba(245,166,35,0.2);
+        .contact-section { margin-bottom:2.5rem; }
+        .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.8rem; }
+        .contact-info-card, .contact-form-card {
+            background: var(--glass); backdrop-filter: blur(20px); border:1px solid var(--border);
+            border-radius:var(--radius-xl); padding:2rem; position:relative; overflow:hidden;
+            transition: box-shadow 0.3s, border-color 0.3s;
         }
-        .floating-demo-btn:hover { background:rgba(245,166,35,0.18); box-shadow:0 0 35px rgba(245,166,35,0.55); }
+        .contact-info-card:hover, .contact-form-card:hover {
+            border-color: rgba(0,212,170,0.3);
+            box-shadow: 0 0 35px rgba(0,212,170,0.15);
+        }
+        .contact-info-card::before, .contact-form-card::before {
+            content:''; position:absolute; top:-30%; left:-20%; width:140%; height:160%;
+            opacity:0.6; z-index:0; animation: liquidMove 5s ease-in-out infinite alternate;
+        }
+        .contact-info-card::before { background: radial-gradient(circle at 30% 30%, rgba(0,212,170,0.15), rgba(155,93,229,0.1), transparent 70%); }
+        .contact-form-card::before { background: radial-gradient(circle at 70% 30%, rgba(155,93,229,0.15), rgba(0,212,170,0.1), transparent 70%); }
+        .contact-info-card h3, .contact-info-card .contact-item, .contact-info-card p, .contact-info-card iframe { position:relative; z-index:1; }
+        .contact-form-card h3, .contact-form-card .form-subtitle, .contact-form-card form { position:relative; z-index:1; }
+        .contact-info-card h3 { font-size:1.3rem; color:#fff; }
+        .contact-item { display:flex; align-items:center; gap:0.8rem; color:#c8ccd4; font-size:0.95rem; margin-top:0.8rem; }
+        .contact-item .ci-icon { width:36px; height:36px; border-radius:50%; background:rgba(0,212,170,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.1rem; border:1px solid rgba(0,212,170,0.3); }
+        .map-container { margin-top:1.5rem; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+        .map-container iframe { width:100%; height:180px; border:0; display:block; }
 
-        .countdown-bar {
-            position:fixed; bottom:0; left:0; width:100%; background:#b71c1c;
-            background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 30px);
-            border-top:1px solid rgba(255,255,255,0.15); padding:0.6rem 2rem;
-            display:flex; justify-content:center; align-items:center; gap:1.5rem;
-            z-index:999; flex-wrap:wrap; color:#fff; font-weight:600;
-        }
+        .form-group { margin-bottom:1rem; }
+        .form-group label { display:block; font-size:0.78rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:0.35rem; font-weight:600; }
+        .form-input { width:100%; padding:0.75rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.12); background:rgba(20,22,41,0.6); backdrop-filter:blur(8px); color:#fff; font-family:'Inter', sans-serif; font-size:0.9rem; transition:all 0.3s; outline:none; }
+        .form-input:focus { border-color:rgba(0,212,170,0.5); box-shadow:0 0 20px rgba(0,212,170,0.15); background:rgba(25,28,50,0.8); }
+        .form-input::placeholder { color:rgba(255,255,255,0.3); }
+        textarea.form-input { resize:vertical; min-height:90px; }
+        .btn-submit { width:100%; padding:0.85rem 1.5rem; border-radius:30px; border:1px solid rgba(0,212,170,0.4); background:rgba(0,180,160,0.18); backdrop-filter:blur(14px); color:#fff; font-weight:700; font-size:0.95rem; cursor:pointer; letter-spacing:0.5rem; transition:all var(--transition); position:relative; overflow:hidden; font-family:'Inter', sans-serif; }
+        .btn-submit::before { content:''; position:absolute; top:-30%; left:-20%; width:140%; height:160%; background: radial-gradient(circle at 30% 30%, rgba(0,212,170,0.25), rgba(155,93,229,0.15), transparent 70%); opacity:0.7; animation: liquidMove 4s ease-in-out infinite alternate; z-index:0; }
+        .btn-submit span { position:relative; z-index:1; }
+        .btn-submit:hover { background:rgba(0,212,170,0.3); border-color:rgba(0,212,170,0.8); box-shadow: 0 0 35px rgba(0,212,170,0.35); }
+
+        .countdown-bar { position:fixed; bottom:0; left:0; width:100%; background:#b71c1c; background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 15px, rgba(0,0,0,0.08) 15px, rgba(0,0,0,0.08) 30px); border-top:1px solid rgba(255,255,255,0.15); padding:0.6rem 2rem; display:flex; justify-content:center; align-items:center; gap:1.5rem; z-index:999; flex-wrap:wrap; color:#fff; font-weight:600; }
         .live-analysis { font-size:0.75rem; color:#ffcdd2; animation:fadeText 3s infinite; }
         @keyframes fadeText { 0%,100%{ opacity:0.6; } 50%{ opacity:1; } }
         footer { text-align:center; padding:1.2rem 0 4.5rem; color:#555; font-size:0.82rem; border-top:1px solid var(--border); margin-top:1.5rem; }
 
-        /* Mobile improvements */
         @media (max-width:768px) {
             .container { padding:1rem; }
-            .header {
-                flex-direction: column-reverse;
-                align-items: flex-end;
-            }
-            .hero-text {
-                align-self: flex-start;
-                text-align: left;
-                width: 100%;
-            }
-            .uni-logo { width: 55px; }
-            .hero-text h1 { font-size: 2rem; }
+            .header { flex-direction: column-reverse; align-items: flex-end; }
+            .hero-text { align-self: flex-start; text-align: left; width:100%; }
+            .uni-logo { width:55px; }
+            .hero-text h1 { font-size:2rem; }
             .mission-vision-grid { grid-template-columns:1fr; }
             .features-grid { grid-template-columns:1fr 1fr; }
             .team-card { flex:0 0 160px; height:270px; }
             .avatar-circle { width:50px; height:50px; font-size:1.2rem; }
-            .bg-chart.chart1 { width: 50%; top: 5%; right: 2%; }
-            .bg-chart.chart2 { width: 45%; bottom: 5%; left: 2%; }
+            .bg-chart.chart1 { width:50%; top:5%; right:2%; }
+            .bg-chart.chart2 { width:45%; bottom:5%; left:2%; }
+            .cta-row { gap:1rem; }
+            .btn-liquid { font-size:0.9rem; padding:0.7rem 1.5rem; }
+            .contact-grid { grid-template-columns:1fr; }
+            .logo-item { font-size:0.8rem; }
+            .logo-item svg { width:22px; height:22px; }
         }
         @media (max-width:480px) {
             .features-grid { grid-template-columns:1fr; }
             .team-card { flex:0 0 140px; height:250px; }
-            .bg-chart.chart1 { width: 70%; }
-            .bg-chart.chart2 { width: 65%; }
+            .bg-chart.chart1 { width:70%; }
+            .bg-chart.chart2 { width:65%; }
+            .cta-row { flex-direction:column; align-items:stretch; gap:0.8rem; }
+            .btn-liquid { text-align:center; justify-content:center; width:100%; }
         }
     </style>
 </head>
@@ -482,23 +456,33 @@
             <span style="color:var(--muted); font-size:0.8rem;">Analyzing 50k+ products across multiple markets</span>
         </div>
 
-        <!-- About Us with background charts -->
+        <div class="cta-row">
+            <a href="https://marketlens-ai.streamlit.app/" target="_blank" class="btn-liquid btn-primary" rel="noopener">
+                <span>Try MarketLens-AI</span>
+            </a>
+            <a href="#contact-section" class="btn-liquid btn-phone">
+                <svg class="phone-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="5" y="2" width="14" height="20" rx="3" stroke="currentColor"/>
+                    <line x1="12" y1="18" x2="12" y2="18.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+                <span>Get in Touch</span>
+            </a>
+        </div>
+
         <section>
             <h2 class="section-title"><span class="accent-dot"></span>About MarketLens</h2>
-            <div class="glass-card no-tilt">
+            <div class="glass-card">
                 <div class="about-bg-charts">
                     <div class="bg-chart chart1">
                         <svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:auto;">
-                            <polyline points="0,120 40,90 80,130 120,50 160,100 200,30 240,70 280,20 300,60"
-                                      fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"/>
+                            <polyline points="0,120 40,90 80,130 120,50 160,100 200,30 240,70 280,20 300,60" fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round"/>
                             <circle cx="120" cy="50" r="4" fill="#00d4aa"/>
                             <circle cx="200" cy="30" r="4" fill="#00d4aa"/>
                         </svg>
                     </div>
                     <div class="bg-chart chart2">
                         <svg viewBox="0 0 250 120" preserveAspectRatio="none" style="width:100%;height:auto;">
-                            <polyline points="0,100 30,70 60,110 90,30 120,80 150,20 180,60 210,40 250,50"
-                                      fill="none" stroke="#f15bb5" stroke-width="2" stroke-linecap="round"/>
+                            <polyline points="0,100 30,70 60,110 90,30 120,80 150,20 180,60 210,40 250,50" fill="none" stroke="#f15bb5" stroke-width="2" stroke-linecap="round"/>
                             <circle cx="90" cy="30" r="4" fill="#f15bb5"/>
                             <circle cx="150" cy="20" r="4" fill="#f15bb5"/>
                         </svg>
@@ -506,10 +490,10 @@
                 </div>
                 <div class="about-text">
                     <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem;">
-                        MarketLens AI is an AI analytics platform built from the ground up to eliminate the guesswork in cross‑border e‑commerce. We understand the frustration of messy, scattered product data, the hours wasted manually reading through thousands of customer reviews, and the lack of a standardized way to score product potential not to mention the eye‑watering costs of traditional industry tools. That’s why we created a solution that finally puts powerful, accessible market intelligence directly into the hands of sellers.
+                        MarketLens AI is an AI analytics platform built from the ground up to eliminate the guesswork in cross‑border e‑commerce. We understand the frustration of messy, scattered product data, the hours wasted manually reading through thousands of customer reviews, and the lack of a standardized way to score product potential — not to mention the eye‑watering costs of traditional industry tools. That's why we created a solution that finally puts powerful, accessible market intelligence directly into the hands of sellers.
                     </p>
                     <p style="color:#c8ccd4; line-height:1.8; font-size:1.05rem; margin-top:1rem;">
-                        Powered by cutting‑edge LLMs including DeepSeek and a proprietary multi‑factor evaluation engine, MarketLens transforms raw signals into crystal‑clear decisions. Whether it’s identifying emerging product trends, uncovering hidden consumer pain points through sentiment analysis, or predicting inventory risks before they happen, our platform acts as a 24/7 strategic co‑pilot that continuously learns and improves. We don’t just show you data we show you what to do with it.
+                        Powered by cutting‑edge LLMs including DeepSeek and a proprietary multi‑factor evaluation engine, MarketLens transforms raw signals into crystal‑clear decisions. Whether it's identifying emerging product trends, uncovering hidden consumer pain points through sentiment analysis, or predicting inventory risks before they happen, our platform acts as a 24/7 strategic co‑pilot that continuously learns and improves. We don't just show you data — we show you what to do with it.
                     </p>
                 </div>
             </div>
@@ -526,7 +510,7 @@
                 <div class="mv-card vision">
                     <span class="mv-icon">🔭</span>
                     <h3>Our Vision</h3>
-                    <p>Become the all-in-one self-improving AI decision engine for every merchant adapting to global shifts, consumer sentiment, and competition so sellers stay ahead.</p>
+                    <p>Become the all-in-one self-improving AI decision engine for every merchant — adapting to global shifts, consumer sentiment, and competition so sellers stay ahead.</p>
                 </div>
             </div>
         </section>
@@ -544,6 +528,53 @@
                 <div class="feature-card"><span class="feature-icon">🌐</span><h4>Multi-Language AI Assistant</h4><p>Built-in assistant for seamless global communication.</p><div class="mini-chart"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>
             </div>
         </section>
+
+        <!-- Logo ticker moved above the Team -->
+        <div class="logo-ticker-wrapper">
+            <p class="logo-ticker-label">Trusted Across Top Global Marketplaces</p>
+            <div class="logo-ticker">
+                <div class="logo-track" id="logoTrack">
+                    <!-- Amazon -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M15 3 L17 9 L24 7 L19 12 L23 20 L15 15 L7 20 L11 12 L6 7 L13 9 Z" fill="#FF9900"/><path d="M3 23 L27 23" stroke="#FF9900" stroke-width="2"/></svg> Amazon</div>
+                    <!-- eBay -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><text x="2" y="24" font-size="22" font-weight="bold" fill="#E53238" font-family="Arial">e</text><text x="15" y="24" font-size="22" font-weight="bold" fill="#0064D2" font-family="Arial">b</text><text x="21" y="24" font-size="22" font-weight="bold" fill="#F5AF02" font-family="Arial">a</text><text x="27" y="24" font-size="22" font-weight="bold" fill="#86B817" font-family="Arial">y</text></svg> eBay</div>
+                    <!-- Shopify -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M15 4 L6 12 L8 24 L22 24 L24 12 Z" fill="#96BF48"/><path d="M11 12 L15 18 L20 10" stroke="#fff" stroke-width="2" fill="none"/></svg> Shopify</div>
+                    <!-- Alibaba -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#FF6A00"/><text x="9" y="21" font-size="14" font-weight="bold" fill="#fff" font-family="Arial">a</text></svg> Alibaba</div>
+                    <!-- AliExpress -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#E62E04"/><text x="6" y="20" font-size="11" font-weight="bold" fill="#fff" font-family="Arial">AE</text></svg> AliExpress</div>
+                    <!-- Walmart -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M7 10 L15 2 L23 10 L20 22 L10 22 Z" fill="#0071DC"/></svg> Walmart</div>
+                    <!-- Etsy -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#F1641E"/><text x="10" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">E</text></svg> Etsy</div>
+                    <!-- Lazada -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><rect x="4" y="7" width="22" height="16" rx="3" fill="#0F1468"/><text x="7" y="19" font-size="10" fill="#fff" font-family="Arial">Laz</text></svg> Lazada</div>
+                    <!-- Shopee -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#EE4D2D"/><text x="9" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">S</text></svg> Shopee</div>
+                    <!-- Temu -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><polygon points="15,3 6,24 24,24" fill="#FB7701"/></svg> Temu</div>
+                    <!-- Rakuten -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#BF0000"/><text x="9" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">R</text></svg> Rakuten</div>
+                    <!-- Mercado Libre -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#FFE600"/><text x="6" y="21" font-size="13" font-weight="bold" fill="#333" font-family="Arial">ML</text></svg> Mercado Libre</div>
+
+                    <!-- Duplicate set for seamless scroll -->
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M15 3 L17 9 L24 7 L19 12 L23 20 L15 15 L7 20 L11 12 L6 7 L13 9 Z" fill="#FF9900"/><path d="M3 23 L27 23" stroke="#FF9900" stroke-width="2"/></svg> Amazon</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><text x="2" y="24" font-size="22" font-weight="bold" fill="#E53238" font-family="Arial">e</text><text x="15" y="24" font-size="22" font-weight="bold" fill="#0064D2" font-family="Arial">b</text><text x="21" y="24" font-size="22" font-weight="bold" fill="#F5AF02" font-family="Arial">a</text><text x="27" y="24" font-size="22" font-weight="bold" fill="#86B817" font-family="Arial">y</text></svg> eBay</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M15 4 L6 12 L8 24 L22 24 L24 12 Z" fill="#96BF48"/><path d="M11 12 L15 18 L20 10" stroke="#fff" stroke-width="2" fill="none"/></svg> Shopify</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#FF6A00"/><text x="9" y="21" font-size="14" font-weight="bold" fill="#fff" font-family="Arial">a</text></svg> Alibaba</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#E62E04"/><text x="6" y="20" font-size="11" font-weight="bold" fill="#fff" font-family="Arial">AE</text></svg> AliExpress</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><path d="M7 10 L15 2 L23 10 L20 22 L10 22 Z" fill="#0071DC"/></svg> Walmart</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#F1641E"/><text x="10" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">E</text></svg> Etsy</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><rect x="4" y="7" width="22" height="16" rx="3" fill="#0F1468"/><text x="7" y="19" font-size="10" fill="#fff" font-family="Arial">Laz</text></svg> Lazada</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#EE4D2D"/><text x="9" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">S</text></svg> Shopee</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><polygon points="15,3 6,24 24,24" fill="#FB7701"/></svg> Temu</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#BF0000"/><text x="9" y="22" font-size="16" font-weight="bold" fill="#fff" font-family="Arial">R</text></svg> Rakuten</div>
+                    <div class="logo-item"><svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#FFE600"/><text x="6" y="21" font-size="13" font-weight="bold" fill="#333" font-family="Arial">ML</text></svg> Mercado Libre</div>
+                </div>
+            </div>
+        </div>
 
         <section>
             <h2 class="section-title"><span class="accent-dot"></span>The Team</h2>
@@ -621,20 +652,70 @@
         <section>
             <h2 class="section-title"><span class="accent-dot"></span>Faculty Advisors</h2>
             <div class="advisor-row">
-                <div class="advisor-card"><div class="name">刘琉 · Liu Liu</div><div class="dept">Overseas Education College, Nanjing Tech University</div><div class="contact">📧 liuliu@njtech.edu.cn</div></div>
-                <div class="advisor-card"><div class="name">张军强 · Zhang Junqiang</div><div class="dept">School of Computer Science, Nanjing Tech University</div><div class="contact">📧 zjunqiang@126.com</div></div>
+                <div class="advisor-card">
+                    <div class="name">刘琉 · Liu Liu</div>
+                    <div class="dept">Overseas Education College, Nanjing Tech University</div>
+                    <div class="contact">📧 liuliu@njtech.edu.cn</div>
+                </div>
+                <div class="advisor-card">
+                    <div class="name">张军强 · Zhang Junqiang</div>
+                    <div class="dept">School of Computer Science, Nanjing Tech University</div>
+                    <div class="contact">📧 zjunqiang@126.com</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact-section">
+            <h2 class="section-title"><span class="accent-dot"></span>Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <h3>Get in Touch</h3>
+                    <p style="color:var(--muted); font-size:0.9rem; line-height:1.5;">Have questions about MarketLens AI? We'd love to hear from you.</p>
+                    <div class="contact-item">
+                        <div class="ci-icon">✉️</div>
+                        <div><a href="mailto:contact@marketlens-ai.com" style="color:#c8ccd4; text-decoration:none;">contact@marketlens-ai.com</a></div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="ci-icon">📍</div>
+                        <div><span style="color:#c8ccd4;">30 Puzhu South Road, Pukou District, Nanjing</span></div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=118.78%2C32.04%2C118.83%2C32.08&layer=mapnik&marker=32.0603%2C118.7969" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form-card">
+                    <h3>Subscribe & Connect</h3>
+                    <p class="form-subtitle">Fill out the form or just subscribe to our newsletter.</p>
+                    <form action="https://formspree.io/f/mkolwvgn" method="POST" id="contactForm">
+                        <div class="form-group">
+                            <label for="formName">Name *</label>
+                            <input type="text" id="formName" name="name" class="form-input" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="formEmail">Email *</label>
+                            <input type="email" id="formEmail" name="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="formPhone">Phone (optional)</label>
+                            <input type="tel" id="formPhone" name="phone" class="form-input" placeholder="+86 123 4567 8901">
+                        </div>
+                        <div class="form-group">
+                            <label for="formMessage">Message (or just subscribe)</label>
+                            <textarea id="formMessage" name="message" class="form-input" placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="New message from MarketLens AI website">
+                        <button type="submit" class="btn-submit"><span>📬 Send & Subscribe</span></button>
+                    </form>
+                </div>
             </div>
         </section>
     </div>
-
-    <a href="https://marketlens-ai.streamlit.app/" target="_blank" class="floating-demo-btn">Try Live Demo →</a>
 
     <div class="countdown-bar">
         <span class="label">🚀 Finals Countdown</span>
         <div class="timer-digits" id="timerDigits"></div>
         <span class="live-analysis" id="liveAnalysis">Analyzing market trends...</span>
     </div>
-
     <footer>© 2026 MarketLens AI · Nanjing Tech University · OPC Intelligent Agent Innovation Track</footer>
 
     <script>
@@ -688,7 +769,7 @@
             function updateTimer() {
                 const now = Date.now();
                 const dist = target - now;
-                if (dist <= 0) {
+                if(dist<=0) {
                     timer.innerHTML = '<span>00</span>d <span>00</span>h <span>00</span>m <span>00</span>s';
                     return;
                 }
