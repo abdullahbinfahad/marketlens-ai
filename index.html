@@ -531,7 +531,7 @@
 
         <!-- Logo ticker moved above the Team -->
         <div class="logo-ticker-wrapper">
-            <p class="logo-ticker-label">Trusted Across Top Global Marketplaces</p>
+            <p class="logo-ticker-label">Data Collection From Trusted Top Global Marketplaces</p>
             <div class="logo-ticker">
                 <div class="logo-track" id="logoTrack">
                     <!-- Amazon -->
@@ -712,7 +712,7 @@
     </div>
 
     <div class="countdown-bar">
-        <span class="label">🚀 Finals Countdown</span>
+        <span class="label">Finals Countdown</span>
         <div class="timer-digits" id="timerDigits"></div>
         <span class="live-analysis" id="liveAnalysis">Analyzing market trends...</span>
     </div>
@@ -783,7 +783,7 @@
             setInterval(updateTimer, 1000);
 
             const analysisEl = document.getElementById('liveAnalysis');
-            const phrases = ["Analyzing market trends...","Scanning consumer sentiment...","Updating product scores...","Monitoring competitor moves..."];
+            const phrases = ["Analyzing market trends...","Scanning consumer sentiment...","Updating product scores..."];
             let i = 0;
             setInterval(() => { i=(i+1)%phrases.length; analysisEl.textContent = phrases[i]; }, 3000);
         })();
