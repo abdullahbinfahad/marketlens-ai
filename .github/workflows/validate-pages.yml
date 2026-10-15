@@ -1,0 +1,34 @@
+name: Validate MarketLens Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Validate custom domain
+        run: test "$(cat CNAME)" = "www.marketlens-ai.com"
+      - name: Validate homepage assets
+        run: |
+          grep -q "dummyjson.com" index.html
+          grep -q "fakestoreapi.com" index.html
+          grep -q "world.openbeautyfacts.org" index.html
+          grep -q "GO" index.html
+          grep -q "CAUTION" index.html
+          grep -q "PASS" index.html
+      - name: Validate inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path("index.html").read_text()
+          scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+          Path("/tmp/marketlens-inline.js").write_text("\n".join(scripts))
+          PY
+          node --check /tmp/marketlens-inline.js
