@@ -31,6 +31,11 @@ jobs:
           grep -q "researchPeriod" index.html
           grep -q "reportCurrency" index.html
           grep -q "researchObjective" index.html
+          grep -q "closest available" index.html
+          grep -q "discoveryView" index.html
+          grep -q "trendsView" index.html
+          grep -q "reviewsView" index.html
+          grep -q "researchView" index.html
       - name: Validate inline JavaScript syntax
         run: |
           python - <<'PY'
