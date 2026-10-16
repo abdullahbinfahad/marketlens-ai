@@ -19,6 +19,9 @@ jobs:
           grep -q "dummyjson.com" index.html
           grep -q "fakestoreapi.com" index.html
           grep -q "world.openbeautyfacts.org" index.html
+          test "$(grep -c "{ name:" source_registry.js)" -ge 60
+          grep -q "heroSweep" index.html
+          grep -q "rowIn" index.html
           grep -q "GO" index.html
           grep -q "CAUTION" index.html
           grep -q "PASS" index.html
@@ -32,3 +35,4 @@ jobs:
           Path("/tmp/marketlens-inline.js").write_text("\n".join(scripts))
           PY
           node --check /tmp/marketlens-inline.js
+          node --check source_registry.js

@@ -8,6 +8,17 @@ The published homepage is a browser-native, search-first product intelligence sy
 - Fake Store API for free sample prices, ratings, and reviews
 - Open Beauty Facts for free beauty identity and ingredient data
 
+The Methodology view now includes a **68-source catalog** grouped into four honest states:
+
+- **4 live/free** sources currently available to the public app
+- **9 optional** sources that require credentials, accounts, or provider approval
+- **26 watchlist** sources planned for compliant integrations
+- **29 reference** sources for macro, trade, regulatory, logistics, and research context
+
+The catalog is a source-universe roadmap, not a claim that every source is queried on every search. The UI explicitly shows which providers actually responded to the current search.
+
+Product results use lightweight entrance animation, a subtle hero sweep, and interactive hover states. These are CSS effects only and do not change scoring or data interpretation.
+
 The page normalizes returned records, removes duplicate product/brand matches, calculates evidence confidence, provides Demand/Profit/Risk/Competition Gap signals, shows GO/CAUTION/PASS decisions, compares results, and runs transparent profitability simulations.
 
 The fixed decision formula is:
