@@ -25,6 +25,12 @@ jobs:
           grep -q "GO" index.html
           grep -q "CAUTION" index.html
           grep -q "PASS" index.html
+          grep -q "searchMode" index.html
+          grep -q "primaryMarket" index.html
+          grep -q "comparisonMarkets" index.html
+          grep -q "researchPeriod" index.html
+          grep -q "reportCurrency" index.html
+          grep -q "researchObjective" index.html
       - name: Validate inline JavaScript syntax
         run: |
           python - <<'PY'

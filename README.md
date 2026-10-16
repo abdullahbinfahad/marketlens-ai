@@ -19,6 +19,18 @@ The catalog is a source-universe roadmap, not a claim that every source is queri
 
 Product results use lightweight entrance animation, a subtle hero sweep, and interactive hover states. These are CSS effects only and do not change scoring or data interpretation.
 
+## Advanced research scope
+
+The search form includes progressive-disclosure controls for:
+
+- Search mode: exact product, discovery, comparison, trend, reviews, profit, or deep research
+- Primary market and comparison markets
+- Research period
+- Reporting currency
+- Research objective
+
+These fields define and display the user's research specification. The current free browser providers primarily return current product observations. They do not automatically create historical country comparisons, exchange-rate conversions, customs determinations, or market-specific demand conclusions. The interface states that limitation rather than presenting unsupported precision.
+
 The page normalizes returned records, removes duplicate product/brand matches, calculates evidence confidence, provides Demand/Profit/Risk/Competition Gap signals, shows GO/CAUTION/PASS decisions, compares results, and runs transparent profitability simulations.
 
 The fixed decision formula is:
