@@ -35,6 +35,8 @@ These fields define and display the user's research specification. The current f
 
 Provider search endpoints do not contain every product on the internet. When an exact query returns no direct match, MarketLens now loads the broad free catalog, ranks available records by token relevance, and returns a clearly labeled **closest available** result set instead of displaying an empty screen. These are not silently presented as exact matches, and the application does not fabricate thousands of products. Result volume is bounded by the records genuinely returned by the configured providers.
 
+Exact identity matches are prioritized separately from related results. The first result can be a verified identity record only when its aliases or model identifier match the query. For example, `Samsung A25`, `Samsung Galaxy A25`, `Galaxy A25 5G`, and `SM-A256` resolve to the verified Samsung Galaxy A25 5G identity sourced from Samsung's official product documentation. Market-specific price and availability remain unavailable until a marketplace source returns them.
+
 The application now has dedicated sections for **Search**, **Discovery**, **Compare**, **Trends**, **Reviews**, **Profit**, **Research**, and **Methodology**. Discovery filters current results by evidence coverage, price, and category/keyword. Trends and Reviews explicitly show when the free sources do not provide enough historical or review-text evidence.
 
 The page normalizes returned records, removes duplicate product/brand matches, calculates evidence confidence, provides Demand/Profit/Risk/Competition Gap signals, shows GO/CAUTION/PASS decisions, compares results, and runs transparent profitability simulations.
