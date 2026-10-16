@@ -27,6 +27,13 @@ The protected Streamlit repository contains the Python data layer, provider adap
 - 68-entry source universe showing live, optional, watchlist, and reference status.
 - Product-result entrance animation and restrained UI motion.
 - GitHub Pages validation workflow and JavaScript syntax checks.
+- Broad-query fallback that ranks up to 60 closest available catalog records when an exact provider search returns no match, with explicit fallback labeling.
+
+### Verified catalog coverage boundary
+
+The available managed workbook was checked during the final audit and contains **15 real product records**. The free browser providers add a small public prototype catalog and sample listings. Therefore, the public site does not claim thousands of exact results for every query. It returns ranked closest-available records when possible and labels them clearly.
+
+A truthful requirement for thousands of results and broad comparisons needs a connected 20K+ managed catalog or authorized marketplace backend. Generating duplicates or invented products would corrupt the scoring, comparison, and evidence model, so it is intentionally not used.
 
 ## Verified integrations
 
