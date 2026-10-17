@@ -12,9 +12,9 @@ The published homepage is a browser-native, search-first product intelligence sy
 - Wikipedia for reference identity and explanation
 - iTunes Search for public digital-product and media discovery
 
-The Methodology view now includes a **68-source catalog** grouped into four honest states:
+The Methodology view now includes a **102-source catalog** grouped into four honest states:
 
-- **4 live/free** sources currently available to the public app
+- **8 live/free** sources currently available to the public app or free-provider cascade
 - **9 optional** sources that require credentials, accounts, or provider approval
 - **26 watchlist** sources planned for compliant integrations
 - **29 reference** sources for macro, trade, regulatory, logistics, and research context
