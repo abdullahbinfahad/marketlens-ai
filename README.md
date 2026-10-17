@@ -47,6 +47,10 @@ Selecting a result opens `product.html`, a dedicated product intelligence page w
 
 The page normalizes returned records, removes duplicate product/brand matches, calculates evidence confidence, provides Demand/Profit/Risk/Competition Gap signals, shows GO/CAUTION/PASS decisions, compares results, and runs transparent profitability simulations.
 
+The public UI uses a clean white market-research workspace. Search navigation and the live-provider status strip sit below the main search card and above results. Every completed search displays a concise Global research brief with the strongest identity finding, evidence type, source count, commercial-observation count, knowledge count, and verification requirement.
+
+The brief is intentionally evidence-grounded and deterministic in the public static client. The supplied OpenAI secret was not embedded or used in browser code because that would expose it to every visitor. To add LLM-written synthesis safely, connect a protected server-side endpoint and store a newly generated credential there; revoke the exposed key immediately.
+
 The fixed decision formula is:
 
 ```text
