@@ -19,6 +19,10 @@ body{background:linear-gradient(180deg,#f8fafc,#eef2f7);color:var(--ink)}
 </style>
 <style>
 .hero{padding:40px}.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:34px;align-items:stretch}.hero-main{min-width:0}.top-brief{border-left:1px solid #e4e7ec;padding:12px 0 12px 30px;display:flex;flex-direction:column;justify-content:center}.top-brief h2{font-size:1.35rem;line-height:1.2;margin:8px 0 10px;color:#111827}.top-brief p{font-size:.92rem;line-height:1.65;color:#667085;margin:0}.top-brief-rule{height:1px;background:#e4e7ec;margin:22px 0}.top-brief .small{font-size:.78rem}.research-brief{display:none!important}@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.top-brief{border-left:0;border-top:1px solid #e4e7ec;padding:22px 0 0}.hero{padding:28px 22px}}
+</style><style>
+/* Final top-card layout: resilient to static-host HTML parsing */
+.hero-grid{display:block;position:relative;min-height:420px}.hero-main{width:62%}.top-brief{position:absolute;top:0;right:0;width:31%;height:auto;min-height:270px;box-sizing:border-box}
+@media(max-width:800px){.hero-grid{min-height:0}.hero-main{width:100%}.top-brief{position:static;width:100%;min-height:0;margin-top:24px}}
 </style></head>
 <body>
 <div class="app">
