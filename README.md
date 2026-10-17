@@ -2,11 +2,15 @@
 
 This repository serves [marketlens-ai.com](https://marketlens-ai.com/) through GitHub Pages.
 
-The published homepage is a browser-native, search-first product intelligence system. It queries three free public providers directly from the browser:
+The published homepage is a browser-native, search-first product intelligence system. It queries a free public-provider cascade directly from the browser:
 
 - DummyJSON for free product search and prototype fields
 - Fake Store API for free sample prices, ratings, and reviews
 - Open Beauty Facts for free beauty identity and ingredient data
+- Open Food Facts for free food identity data
+- Open Library and Google Books for book and knowledge-product discovery
+- Wikipedia for reference identity and explanation
+- iTunes Search for public digital-product and media discovery
 
 The Methodology view now includes a **68-source catalog** grouped into four honest states:
 
@@ -33,11 +37,13 @@ These fields define and display the user's research specification. The current f
 
 ## Search behavior for unique queries
 
-Provider search endpoints do not contain every product on the internet. When an exact query returns no direct match, MarketLens now loads the broad free catalog, ranks available records by token relevance, and returns a clearly labeled **closest available** result set instead of displaying an empty screen. These are not silently presented as exact matches, and the application does not fabricate thousands of products. Result volume is bounded by the records genuinely returned by the configured providers.
+Provider search endpoints do not contain every product on the internet. MarketLens now queries multiple free domains in parallel, ranks available records by relevance, and returns a clearly labeled result set instead of displaying an empty screen. Results are grouped into exact verified identity, related/comparison, knowledge evidence, and unresolved search intent. These are not silently presented as exact marketplace matches, and the application does not fabricate thousands of products. Result volume is bounded by the records genuinely returned by the configured providers.
 
 Exact identity matches are prioritized separately from related results. The first result can be a verified identity record only when its aliases or model identifier match the query. For example, `Samsung A25`, `Samsung Galaxy A25`, `Galaxy A25 5G`, and `SM-A256` resolve to the verified Samsung Galaxy A25 5G identity sourced from Samsung's official product documentation. Market-specific price and availability remain unavailable until a marketplace source returns them.
 
 The application now has dedicated sections for **Search**, **Discovery**, **Compare**, **Trends**, **Reviews**, **Profit**, **Research**, and **Methodology**. Discovery filters current results by evidence coverage, price, and category/keyword. Trends and Reviews explicitly show when the free sources do not provide enough historical or review-text evidence.
+
+Selecting a result opens `product.html`, a dedicated product intelligence page with the overview, evidence type, source link, score breakdown, confidence, interpretation, and limitations. Sparse identity/reference records receive **VERIFY** rather than being allowed to produce a false GO decision. A GO requires both the numeric threshold and sufficient observed commercial evidence.
 
 The page normalizes returned records, removes duplicate product/brand matches, calculates evidence confidence, provides Demand/Profit/Risk/Competition Gap signals, shows GO/CAUTION/PASS decisions, compares results, and runs transparent profitability simulations.
 
@@ -47,7 +53,7 @@ The fixed decision formula is:
 MarketScore = Demand × 40% + Profit × 30% − Risk × 20% + Competition Gap × 10%
 ```
 
-The domain version intentionally does not expose API keys. Credential-backed eBay, Keepa, Shopify, and DeepSeek connectors remain in the protected Streamlit backend repository at [abdullahbinfahad/marketlens.ai](https://github.com/abdullahbinfahad/marketlens.ai).
+The domain version intentionally does not expose API keys. Credential-backed eBay, Keepa, Shopify, and DeepSeek connectors remain in the protected Streamlit backend repository at [abdullahbinfahad/marketlens.ai](https://github.com/abdullahbinfahad/marketlens.ai). No free public API can guarantee live exact coverage for every product, geography, price, or seller; those claims require authorized marketplace data.
 
 ## Local check
 
