@@ -50,6 +50,12 @@ body{color:#111827}body p,body .small{color:#475467}.side button{color:#344054}.
 </style><style>
 /* No-gap workspace alignment */
 .workspace-nav{margin-bottom:0!important;padding-bottom:8px}.layout{margin-top:0!important;padding-top:0!important;align-items:start}.side,.content,.metrics{margin-top:0!important}
+</style><style>
+/* Gap-free workspace navigation */
+.workspace-nav{height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;position:relative;z-index:20}.workspace-nav .nav{position:absolute;right:18px;top:-58px;padding:8px 10px;background:#fff;border:1px solid #d8e0ea;border-radius:16px;box-shadow:0 8px 24px rgba(23,32,51,.08);white-space:nowrap}.layout{margin-top:0!important}
+/* Advanced research scope */
+.research-spec{margin:18px 0 0;border:1px solid #cbd8e8;border-radius:16px;background:#f8fbff;overflow:hidden;box-shadow:0 5px 16px rgba(23,32,51,.05)}.research-spec summary{list-style:none;display:flex;align-items:center;gap:10px;cursor:pointer;padding:14px 16px;background:#fff;color:#172033!important;font-size:.9rem;font-weight:750}.research-spec summary::-webkit-details-marker{display:none}.research-spec summary:before{content:'+';display:inline-grid;place-items:center;width:22px;height:22px;border:1px solid #b8cae0;border-radius:7px;color:#1769e0;font-size:1.1rem;line-height:1}.research-spec[open] summary:before{content:'−'}.research-spec summary span{color:#667085;font-weight:500}.research-spec[open] summary{border-bottom:1px solid #d8e0ea;background:#f8fbff}.research-grid{padding:16px;background:#f8fbff;gap:14px}.research-grid .field label{color:#344054;font-weight:700;font-size:.76rem}.research-grid input,.research-grid select{min-height:42px;border:1px solid #cbd5e1;border-radius:10px;color:#172033;background:#fff;padding:0 11px}.scope-note{padding:0 16px 16px!important;margin:0!important;color:#526173!important;font-size:.78rem!important}
+@media(max-width:800px){.workspace-nav{height:auto!important;position:static;margin:12px 0 0!important;padding:0!important}.workspace-nav .nav{position:static;white-space:normal;justify-content:flex-start}.research-spec{margin-top:16px}}
 </style></head>
 <body>
 <div class="app">
